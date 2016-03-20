@@ -1,0 +1,6 @@
+.border{
+	border: 1px solid crimson;
+	max-width: 80%;
+	height: 200px;
+	float: center;
+}
