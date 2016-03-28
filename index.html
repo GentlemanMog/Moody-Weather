@@ -33,7 +33,7 @@
 				<div class="nav-Menu">
 					<a class="smallnav" href="#"><img src="resources/navbar.png" alt=""/></a>
 					<ul class="nav">
-						<li class="active"><a class="Pro" href="#">Project</a></li>
+						<li><a class="Pro" href="#">Project</a></li>
 						<li><a class="Con" href="#">Concepts</a></li>
 						<li><a class="Dev" href="#">Development</a></li>
 						<li><a class="Exp" href="#">Experiments</a></li>
@@ -44,7 +44,7 @@
 				
 				<div class="iconSection">
 					<div class="icon">
-						<a href="#"><img src="resources/Moody.png" alt=""/></a>
+						<a class="showTabs" href="#"><img src="resources/Moody.png" alt=""/></a>
 					</div>
 					<div class="clear"></div>
 				</div>
@@ -56,7 +56,7 @@
 	<div class="main">
 		<div class="wrap">
 			<div class="column-left">
-				<div class="Lbox-1">
+				<div class="Lbox-1 info">
 					<h3>Moody Weather</h3>
 					<div class="information">
 						<div class="words">
@@ -68,22 +68,25 @@
 						</div>
 					</div>
 				</div>
-				<div class="Lbox-2">
-					<h3>Tempo Weather</h3>
+				<div class="Lbox-2 info">
+					<h3>What Devices?</h3>
 					<p>fwbn gkegbwlgbwl</p>
 					<!-- <img src="resources/Moody.png"/> -->
 				</div>
-				<div class="Lbox-2">
-					<h3>Tempo Weather</h3>
+				<div class="Lbox-2 concep">
+					<h3>Interfaces</h3>
 					<img src="resources/Moody.png"/>
 				</div>
-				<div class="Lbox-2">
-					<h3>Tempo Weather</h3>
+				<div class="Lbox-2 devel">
+					<h3>Customizable interface</h3>
 					<img src="resources/Moody.png"/>
 				</div>
-				<div class="Lbox-2">
-					<h3 class="getLocation">Current Weather</h3>
-					<img src="resources/Moody.png">
+				<div class="Lbox-2 expir">
+					<button class="getLocation"><img src="resources/icon.png"></button>
+					<h3>Weather Experiment Card</h3>
+					<div class="MoodRing"></div>
+					<div class="humidMood"></div>
+					<!-- <img src="resources/Moody.png"> -->
 					<div id="weatherTime"></div>
 				</div>
 			</div>
@@ -93,7 +96,7 @@
 				</div>
 			</div>
 			<div class="column-right">
-				<div class="Lbox-1">
+				<div class="Lbox-1 info">
 					<h3>How it works</h3>
 					<div class="information border">
 						<div class="words">
@@ -101,21 +104,25 @@
 						</div>
 					</div>
 				</div>
-				<div class="Lbox-2">
-					<h3>Tempo Weather</h3>
+				<div class="Lbox-2 info">
+					<h3>Audience</h3>
 					<img src="resources/Moody.png"/>
 				</div>
-				<div class="Lbox-2">
-					<h3>Tempo Weather</h3>
+				<div class="Lbox-2 concep">
+					<h3>Mobile Networks</h3>
 					<img src="resources/Moody.png"/>
 				</div>
-				<div class="Lbox-2">
-					<h3>Tempo Weather</h3>
+				<div class="Lbox-2 devel">
+					<h3>Desktop Networks</h3>
 					<img src="resources/Moody.png"/>
 				</div>
-				<div class="Lbox-2">
-					<h3>Tempo Weather</h3>
+				<div id="pass" class="Lbox-2 expir">
+					<h3>Mobile Experiment Card</h3>
 					<img src="resources/Moody.png"/>
+					<div class="lightlevel"></div>
+					<div class="video">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/54ojuDslMdw" frameborder="0" allowfullscreen></iframe>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -126,6 +133,7 @@
 	<!--Script Plugins-->
 	<script type="text/javascript" src="data/js/multiDevice.js"></script>
 	<script type="text/javascript" src="data/js/weatherApp.js"></script>
+	<script type="text/javascript" src="data/js/useDeviceSensor.js"></script>
 
 	<!--Jquer-->
 	<script type="text/javascript" src="data/js/jquery/jquery-ui.js"></script>
