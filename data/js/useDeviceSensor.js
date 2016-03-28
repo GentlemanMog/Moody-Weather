@@ -40,6 +40,6 @@ window.addEventListener("devicelight", function(event){
 		document.body.className = "";
 	}
 
-	$("#pass").html('<h3>' + luminosity + '</h3>');
+	// $("#pass").html('<h3>' + luminosity + '</h3>');	
 	// if(luminosity <= 5){}
 });
