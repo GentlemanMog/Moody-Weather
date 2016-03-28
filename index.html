@@ -5,42 +5,49 @@
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
 	
 	<link rel="shortcut icon" type="image/x-icon" href="resources/icon.png">
 	<title>Moody Weather</title>
 
 	<!--Plugin-->
 	<link rel="stylesheet" type="text/css" href="data/css/main.css">
+	
 	<!--Bootstrap-->
 	<!-- <link href="css/jquery/jquery-ui.min.css" rel="stylesheet"> -->
-	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet">
-
+	<!-- <link href="data/css/bootstrap/bootstrap.min.css" rel="stylesheet"> -->
+<!--  
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+-->
+<!--Jquery Plugin-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script type="text/javascript" src="data/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="data/js/jquery/jquery.easing.js"></script>
+ 	<script type="text/javascript" src="data/js/jquery/jquery.ulslide.js"></script>
 </head>
 
 <body>
 	<div class="wrap">
 		<div class="header">
 			<div class="header-top">
-				<div class="nav-Menu border">
-					<a class="toggleMenu" href="#"><img src="resources/navbar.png" alt=""/></a>
+				<div class="nav-Menu">
+					<a class="smallnav" href="#"><img src="resources/navbar.png" alt=""/></a>
 					<ul class="nav">
-						<li class="active"><a href="#">Project</a></li>
-						<li><a href="">Concepts</a></li>
-						<li><a href="">Development</a></li>
-						<li><a herf="">Experiments</a></li>
+						<li class="active"><a class="Pro" href="#">Project</a></li>
+						<li><a class="Con" href="#">Concepts</a></li>
+						<li><a class="Dev" href="#">Development</a></li>
+						<li><a class="Exp" href="#">Experiments</a></li>
 						<div class="clear"></div>
 					</ul>
+					
 				</div>
 				
-				<div class="iconSection border">
+				<div class="iconSection">
 					<div class="icon">
 						<a href="#"><img src="resources/Moody.png" alt=""/></a>
 					</div>
-
 					<div class="clear"></div>
 				</div>
-
 				<div class="clear"></div>
 			</div>
 		</div>
@@ -48,20 +55,82 @@
 
 	<div class="main">
 		<div class="wrap">
-			<div class="collumn-left">
-				<div class="box-1">
+			<div class="column-left">
+				<div class="Lbox-1">
 					<h3>Moody Weather</h3>
 					<div class="information">
-						What it is?
+						<div class="words">
+							
+							<p>fsfnadlcsdbglwfsfcsdz
+								aduefbslkanbFLS
+								QFSKVGBWLSKGBSLKFB</p>
+
+						</div>
 					</div>
+				</div>
+				<div class="Lbox-2">
+					<h3>Tempo Weather</h3>
+					<p>fwbn gkegbwlgbwl</p>
+					<!-- <img src="resources/Moody.png"/> -->
+				</div>
+				<div class="Lbox-2">
+					<h3>Tempo Weather</h3>
+					<img src="resources/Moody.png"/>
+				</div>
+				<div class="Lbox-2">
+					<h3>Tempo Weather</h3>
+					<img src="resources/Moody.png"/>
+				</div>
+				<div class="Lbox-2">
+					<button class="getLocation"><h3>Current Weather</h3></button>
+					<div id="weatherTime"></div>
+				</div>
+			</div>
+			<div class="column-middle">
+				<div class="clear">
+					<!-- <h3>How it works</h3> -->
+				</div>
+			</div>
+			<div class="column-right">
+				<div class="Lbox-1">
+					<h3>How it works</h3>
+					<div class="information border">
+						<div class="words">
+							<p>resgbkvs</p>
+						</div>
+					</div>
+				</div>
+				<div class="Lbox-2">
+					<h3>Tempo Weather</h3>
+					<img src="resources/Moody.png"/>
+				</div>
+				<div class="Lbox-2">
+					<h3>Tempo Weather</h3>
+					<img src="resources/Moody.png"/>
+				</div>
+				<div class="Lbox-2">
+					<h3>Tempo Weather</h3>
+					<img src="resources/Moody.png"/>
+				</div>
+				<div class="Lbox-2">
+					<h3>Tempo Weather</h3>
+					<img src="resources/Moody.png"/>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	
 
 	<!--Script Plugins-->
-	<script src="data/js/_system@main.js"></script>
+	<script type="text/javascript" src="data/js/_system@main.js"></script>
+	<script type="text/javascript" src="data/js/_system@tab.js"></script>
+
+	<!--Jquer-->
+	<script type="text/javascript" src="data/js/jquery/jquery-ui.js"></script>
+	<script type="text/javascript" src="data/js/jquery/jquery.simpleWeather.js"></script>
+	
+	
 </body>
 
 </html>
