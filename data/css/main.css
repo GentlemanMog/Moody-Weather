@@ -107,6 +107,44 @@ img{
 }
 
 /* WeatherTime */
+.Lbox-2 button{
+	width: 25%;
+	height: 100px;
+	float: left;
+	position: relative;
+	border-radius: 5px 0px 65px 0px;
+	background: #394264;
+	border: 2px solid purple;
+	border-top: none;
+	border-left: none; 
+	display: inline-block;
+	padding: 10px 10px;
+}
+.Lbox-2 button img{
+	width: 50%;
+	height: 50%;
+}
+.MoodRing{
+	width: 50%;
+	height: 350px;
+	background: crimson;
+	padding: 10px 10px;
+	position: relative;
+	display: block;
+	margin-left: 25%;
+	border-radius: 450px;
+}
+.humidMood{
+	width: 15%;
+	height: 100px;
+	background: crimson;
+	/*padding: 10px 10px;*/
+	position: relative;
+	display: block;
+	margin-top: -100px; 
+	margin-left: 25%;
+	border-radius: 450px;
+}
 #weatherTime{
 	width: 70%;
 	margin: 0 auto;
@@ -191,11 +229,22 @@ nav.horizontal ul li{
 	.wrap{
 		width:90%;
 	}
+	.MoodRing{
+		width: 70%;
+		margin-left: 15%;
+	}
+	.humidMood{
+		width: 20%;
+	}
 }
 @media all and (max-width: 1024px) {
     .nav-Menu li a {
 		padding:25px 35px;
 	}
+	.MoodRing{
+		width: 60%;
+	}
+
 	.wrap {
 		width:95%;
 	}
@@ -217,6 +266,30 @@ nav.horizontal ul li{
 		width: 100%;
 		height: 7.5%;
 		margin: 15px 0;
+	}
+	/* Weather Tab */
+	.MoodRing{
+		width: 50%;	
+		margin-left: 25%;
+	}
+	.humidMood{
+		width: 15%;
+	}
+
+	/* Sensor Tab */
+	.lightlevel{
+		background-color: #000;
+		height: 100%;
+		left: 0;
+		opacity: 0;
+		top: 0;
+		width: 100%;
+		z-index: -1;
+
+		transition: opacity 0.5s ease-in-out;
+	}
+	.darker{
+		opacity: 0.7;
 	}
 	/*.information{
 		margin: 1px;
@@ -282,6 +355,14 @@ nav.horizontal ul li{
 	.wrap{
 		width:95%;
 	}
+	.MoodRing{
+		width: 80%;
+		/*height: 250px; 	*/
+		margin-left: 9%;
+	}
+	.humidMood{
+		width: 25%;
+	}
 }
 @media all and (max-width:480px) {
 	.wrap{
@@ -291,6 +372,9 @@ nav.horizontal ul li{
 @media all and (max-width:320px) {
 	.wrap{
 		width:95%;
+	}
+	.MoodRing{
+		width: 80%;
 	}
 	.main{
 		padding: 5px 0;
