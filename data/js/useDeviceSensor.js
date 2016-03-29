@@ -32,6 +32,13 @@ window.addEventListener("devicelight", function(event){
 	// alert(e.value);
 	var luminosity = event.value;
 	
+	showLuminosity(luminosity);
+	
+
+	
+	// if(luminosity <= 5){}
+});
+function showLuminosity(luminosity){
 	if(luminosity <= 5){
 		// $("#pass").addClass("darker");
 		document.body.className = "darker"
@@ -39,7 +46,5 @@ window.addEventListener("devicelight", function(event){
 		// $("#pass").removeClass("darker");
 		document.body.className = "";
 	}
-
-	// $("#pass").html('<h3>' + luminosity + '</h3>');	
-	// if(luminosity <= 5){}
-});
+	$("#video").html('<h3>' + luminosity + '</h3>');	
+}

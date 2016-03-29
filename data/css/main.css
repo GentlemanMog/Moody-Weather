@@ -1,8 +1,19 @@
+@font-face{
+	font-family: dataerror;
+	src: url(font/UNDATAME.ttf);
+
+}
+@font-face{
+	font-family: jonnyboy;
+	src: url(font/CRACJ.ttf);
+}	
 body{
-	background: black;
+	background: #0D0D0D;
 	padding:100px 0;
 	position: relative;
 	display: block;
+	font-family: dataerror;
+	color:#92FFBA;
 }
 a{
 	text-decoration: none;
@@ -19,8 +30,28 @@ img{
 	max-width: 150%;
 	max-height: 150%;
 }
+iframe{
+	width: 100%;
+	height: 400px;
+}
 .clear{
 	clear: both;
+}
+.headsup{
+	width: 90%;
+	/*float: left;*/
+	height: 150px;
+	position: absolute;
+	margin-top: -100px;
+	margin-left: 5%;
+	/*background-image: url("../../resources/MoodyBanner.png");*/
+
+}
+.headsup img{
+	display: block;
+	width: 100%;
+	height: 100%;
+	opacity: 0.8;
 }
 .border{
 	border: 1px solid crimson;
@@ -33,7 +64,7 @@ img{
 	/*-ms-transition:all .2s linear;*/
 }
 .header-top{
-	background: #394264;
+	background: #262626;
 	border-radius: 5px;
 	-wbkit-border-radius: 5px;
 	position: relative;
@@ -48,11 +79,13 @@ img{
 	max-height: 25%;
 	display: block;
 	border-radius: 30px;
-	border: 3px solid purple;
+	border: 3px solid #D9D9D9;
 	-webkit-border-radius:30px;
 }
 .main{
 	padding: 30px 0;
+	padding-bottom: 30px;
+	/*margin-top: -50px*/
 }
 .column-left, .column-right{
 	float: left;
@@ -62,7 +95,7 @@ img{
 	margin: 0 1%;
 	float: left;
 	width: 7.5%;
-	border: 1px solid black;
+	border: 1px solid #0D0D0D;
 }
 
 /*.collumn-left{
@@ -73,37 +106,60 @@ img{
 }*/
 
 /* Left Side */
+.Lbox-1{
+	text-align: center;
+}
+.whatitis img{
+	width: 60%;
+	height: 60%;
+}
+.howitworks img{
+	width: 100%;
+	height: 100%;
+}
+
 .Lbox-1 h3{
-	color: #FFF;
+	color: #92FFBA;
 	font-size: 30px;
 	padding: 20px 0;
 	text-align: center;
 	background: #11a8ab;
 	border-radius:5px 5px 0 0;
+	box-shadow: 0px 0px 87px 14px rgba(0,0,0,0.75);
 }
 .information{
-	background: #394264;
+	background: #262626;
 	border-radius: 0px 0px 5px 5px;
 	margin-top: -30px;
-	border: 1px solid #394264;
+	border: 1px solid #262626;
 	/*height: 250px;*/
 }
 .words{
 	text-align: center;
+	color: #92FFBA;
+	font-size: 18px;
+	font-family: jonnyboy;
+}
+.words p{
+	margin: 10px;
 }
 .Lbox-2{
 	/*padding: 30px 0;*/
-	margin-top: 50px;
+	/*margin-top: 50px;*/
 	background: #11a8ab;
 	text-align: center;
 	border-radius: 5px;
+	box-shadow: 0px 0px 87px 14px rgba(0,0,0,0.75);
 }
 .Lbox-2 h3{
 	border-radius:5px 5px 0 0;
-	color: white;
+	color: #92FFBA;
 	font-size: 30px;
 	padding: 20px 0;
-	background: #394264;
+	background: #262626;
+}
+.Lbox-2 div{
+	padding: 5px 0;
 }
 
 /* WeatherTime */
@@ -111,39 +167,42 @@ img{
 	width: 25%;
 	height: 100px;
 	float: left;
-	position: relative;
+	/*position: relative;*/
 	border-radius: 5px 0px 65px 0px;
-	background: #394264;
-	border: 2px solid purple;
+	background: #262626;
+	/*border: 2px solid purple;*/
 	border-top: none;
+	/*border: none;*/
 	border-left: none; 
 	display: inline-block;
 	padding: 10px 10px;
 }
 .Lbox-2 button img{
 	width: 50%;
-	height: 50%;
+	/*height: 50%;*/
 }
 .MoodRing{
 	width: 50%;
 	height: 350px;
-	background: crimson;
+	background: #A22607;
 	padding: 10px 10px;
-	position: relative;
+	/*position: relative;*/
 	display: block;
 	margin-left: 25%;
 	border-radius: 450px;
+	box-shadow: 0px 0px 87px 14px rgba(0,0,0,0.75);
 }
 .humidMood{
 	width: 15%;
 	height: 100px;
-	background: crimson;
+	background: #A22607;
 	/*padding: 10px 10px;*/
-	position: relative;
+	/*position: relative;*/
 	display: block;
 	margin-top: -100px; 
 	margin-left: 25%;
 	border-radius: 450px;
+	box-shadow: 0px 0px 87px 14px rgba(0,0,0,0.75);
 }
 #weatherTime{
 	width: 70%;
@@ -153,12 +212,23 @@ img{
 }
 #weatherTime h2 {
   margin: 0 0 8px;
-  color: #fff;
+  color: #92FFBA;
   font-size: 100px;
   font-weight: 300;
   text-align: center;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);
 }
+.rings img{
+	width: 40%;
+	height: 40%; 
+	margin-top: 110px;
+}
+.rings2 img{
+	width: 50%;
+	height: 50%;
+	margin-top: 20px; 
+}
+
 
 /* Sensor Tab */
 	.lightlevel{
@@ -176,8 +246,6 @@ img{
 		opacity: 0.7;
 	}
 
-
-/* Right Side */
 
 
 
@@ -207,24 +275,29 @@ nav.horizontal ul li{
 	position: relative;
 }
 .nav-Menu li a:hover{
-	background: indigo;
-	border-bottom: 5px solid purple;
+	background: #737373;
+	border-bottom: 5px solid #D9D9D9;
 }
 .nav-Menu li.active a{
-	background: indigo;
-	border-bottom: 5px solid purple;
+	background: #737373;
+	border-bottom: 5px solid #D9D9D9;
 }
 
 .smallnav{
 	display: none;
-	background: indigo;
+	background: #737373;
 	padding: 10px 10px 5px 10px;
 	border-radius: 40px;
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
+	margin-left: 20px;
+}
+.smallnav img{
+	margin-left: 10px;
+	margin-top: 5px;
 }
 .smallnav:hover{
-	background: purple;
+	background: #D9D9D9;
 }
 .nav:before, .nav:after{
 	content: " ";
@@ -291,6 +364,9 @@ nav.horizontal ul li{
 	.humidMood{
 		width: 15%;
 	}
+	.headsup{
+	height: 100px;
+	}
 
 	/*.information{
 		margin: 1px;
@@ -316,7 +392,7 @@ nav.horizontal ul li{
 		width: 100%;
 		position: absolute;
 		left: 0;
-		background: #292F46;
+		background: #262626;
 		top: 95px;
 		border-radius: 5px;
 	}
@@ -327,7 +403,7 @@ nav.horizontal ul li{
 		top: -9px;
 		border-left:10px solid rgba(0, 0, 0, 0);
 		border-right:10px solid rgba(0, 0, 0, 0);
-		border-bottom:10px solid #292F46;
+		border-bottom:10px solid #D9D9D9;
 	}
 	.nav li ul{
 		width: 100%;
@@ -348,7 +424,7 @@ nav.horizontal ul li{
     }
     .nav li a{
     	border-bottom:5px solid rgba(39, 39, 39, 0);
-    	border-top:1px solid #1F253D;
+    	border-top:1px solid #D9D9D9;
     }
  }
  
@@ -363,6 +439,9 @@ nav.horizontal ul li{
 	}
 	.humidMood{
 		width: 18%;
+	}
+	.headsup{
+	height: 50px;
 	}
 }
 @media all and (max-width:480px) {
