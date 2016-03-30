@@ -28,37 +28,44 @@ deal.style.transform = "rotate(" + tiltRL + "deg) rotate3d(1,0,0, " + (tiltBF * 
 }
 
 // Luminosity
-var luminosity;
+// var luminosity;
+var luminOver;
 var magneticflux = 0;
 
 window.addEventListener("devicelight", function(event){
 	// alert(e.value);
-	luminosity = event.value;
+	var luminosity = event.value;
 	// showLuminosity(luminosity);
 
 	if(luminosity <= 5){
-		document.getElementById("sensor").addClass("veryDark");
+		$(".lightlevel").css("opticity", "0.7");
+		$(".lightlevel").html("<h2>" + luminosity + " Lux</h2> <h2>" + magneticflux + " MgFlux</h2>");
+		// document.getElementById("sensor").addClass("veryDark");
 		// document.body.className = "veryDark";
-	}else if(luminosity <= 50){
-		document.getElementById("sensor").addClass("lighter");
+	}else if(luminosity <= 20){
+		$(".lightlevel").css("opticity", "0.5");
+		$(".lightlevel").html("<h2>" + luminosity + " Lux</h2> <h2>" + magneticflux + " MgFlux</h2>");
+		// document.getElementById("sensor").addClass("lighter");
 		// document.body.className = "lighter"
-	}else if (luminosity <= 100) {
-		document.getElementById("sensor").addClass("toobright");
+	}else if (luminosity <= 50) {
+		$(".lightlevel").css("opticity", "0.3");
+		$(".lightlevel").html("<h2>" + luminosity + " Lux</h2> <h2>" + magneticflux + " MgFlux</h2>");
+		// document.getElementById("sensor").addClass("toobright");
 		// document.body.className = "toobright";
     }else{
 		// document.body.className = ""
+		$(".lightlevel").css("opticity", "0");
     }
-
+    // luminosity = luminOver;
 });
-window.addEventListener("magneticflux", function(event){
-	magneticflux = event.value;
-});
+// window.addEventListener("magneticflux", function(event){
+// 	magneticflux = event.value;
+// });
 
-$(document).ready(function(){
-	showLuminosity();
-});
+// $(document).ready(function(){
+// 	showLuminosity();
+// });
 
-function showLuminosity(){
-	$(".lightlevel").html("<h2>" + luminosity + " Lux</h2> <h2>" + magneticflux + " MgFlux</h2>");
-
-}
+// function showLuminosity(){
+	
+// 	}
