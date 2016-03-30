@@ -12,7 +12,7 @@ $(".getLocation").on('click', function(){
 });
 
 $(document).ready(function(){
-	loadWeather('London', '');
+	loadWeather('Honolulu', '');
 	setInterval(loadWeather, 300000);
 });
 
@@ -23,27 +23,27 @@ function loadWeather(location, woeid){
 		unit: 'f',
 		success: function(weather){
 			//temperature
-			if(weather.alt.temp > 5){
+			if(weather.alt.temp < 5){
 				$('.MoodRing').animate({
 					backgroundColor: '#110F56'
 				}, 1500);
-			}else if (weather.alt.temp > 10) {
+			}else if (weather.alt.temp < 10) {
 				$('.MoodRing').animate({
 					backgroundColor: '#2A2856'
 				}, 1500);
-			}else if (weather.alt.temp > 15) {
+			}else if (weather.alt.temp < 15) {
 				$('.MoodRing').animate({
 					backgroundColor: '#503356'
 				}, 1500);
-			}else if (weather.alt.temp > 20) {
+			}else if (weather.alt.temp < 20) {
 				$('.MoodRing').animate({
 					backgroundColor: '#561435'
 				}, 1500);
-			}else if (weather.alt.temp > 25) {
+			}else if (weather.alt.temp < 25) {
 				$('.MoodRing').animate({
 					backgroundColor: '#560923'
 				}, 1500);
-			}else if (weather.alt.temp > 30) {
+			}else if (weather.alt.temp < 30) {
 				$('.MoodRing').animate({
 					backgroundColor: '#561A1C'
 				}, 1500);
@@ -54,23 +54,23 @@ function loadWeather(location, woeid){
 			}
 
 			//Humidity
-			if(weather.humidity > 10){
+			if(weather.humidity < 10){
 				$('.humidMood').animate({
 					backgroundColor: '#56413B'
 				}, 1500);
-			}else if (weather.humidity > 20) {
+			}else if (weather.humidity < 20) {
 				$('.humidMood').animate({
 					backgroundColor: '#330D0D'
 				}, 1500);
-			}else if (weather.humidity > 30) {
+			}else if (weather.humidity < 30) {
 				$('.humidMood').animate({
 					backgroundColor: '#562A29'
 				}, 1500);
-			}else if (weather.humidity > 40) {
+			}else if (weather.humidity < 40) {
 				$('.humidMood').animate({
 					backgroundColor: '#562112'
 				}, 1500);
-			}else if (weather.humidity > 50) {
+			}else if (weather.humidity < 50) {
 				$('.humidMood').animate({
 					backgroundColor: '#560201'
 				}, 1500);

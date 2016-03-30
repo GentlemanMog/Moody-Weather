@@ -231,20 +231,35 @@ iframe{
 
 
 /* Sensor Tab */
-	.lightlevel{
-		background-color: #000;
-		height: 100%;
-		left: 0;
-		opacity: 0;
-		top: 0;
-		width: 100%;
-		z-index: -1;
+.lightlevel{
+	background-color: #000;
+	height: 300px;
+	left: 0;
+	opacity: 0;
+	top: 0;
+	width: 100%;
+	/*z-index: 2;*/
+	position: relative;
+	transition: opacity 0.5s ease-in-out;
+	color: #92FFBA;
+}
+.lightlevel h2{
+	margin-top: 90px;
+	opacity: 1;
+	color: #92FFBA;
+ 	font-size: 30px;
+ 	font-weight: 300;
+}
 
-		transition: opacity 0.5s ease-in-out;
-	}
-	.darker .lightlevel{
-		opacity: 0.7;
-	}
+.veryDark .lightlevel{
+	opacity: 0.7;
+}
+.lighter .lightlevel{
+	opacity: 0.5;
+}
+.veryDark .lightlevel{
+	opacity: 0.3;
+}
 
 
 
