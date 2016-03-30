@@ -28,23 +28,37 @@ deal.style.transform = "rotate(" + tiltRL + "deg) rotate3d(1,0,0, " + (tiltBF * 
 }
 
 // Luminosity
+var luminosity;
+var magneticflux = 0;
+
 window.addEventListener("devicelight", function(event){
 	// alert(e.value);
-	var luminosity = event.value;
-	
-	showLuminosity(luminosity);
-	
+	luminosity = event.value;
+	// showLuminosity(luminosity);
 
-	
-	// if(luminosity <= 5){}
-});
-function showLuminosity(luminosity){
 	if(luminosity <= 5){
-		// $("#pass").addClass("darker");
-		document.body.className = "darker"
-	}else{
-		// $("#pass").removeClass("darker");
-		document.body.className = "";
-	}
-	$("#video").html('<h3>' + luminosity + '</h3>');	
+		document.getElementById("sensor").addClass("veryDark");
+		// document.body.className = "veryDark";
+	}else if(luminosity <= 50){
+		document.getElementById("sensor").addClass("lighter");
+		// document.body.className = "lighter"
+	}else if (luminosity <= 100) {
+		document.getElementById("sensor").addClass("toobright");
+		// document.body.className = "toobright";
+    }else{
+		// document.body.className = ""
+    }
+
+});
+window.addEventListener("magneticflux", function(event){
+	magneticflux = event.value;
+});
+
+$(document).ready(function(){
+	showLuminosity();
+});
+
+function showLuminosity(){
+	$(".lightlevel").html("<h2>" + luminosity + " Lux</h2> <h2>" + magneticflux + " MgFlux</h2>");
+
 }

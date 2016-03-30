@@ -79,6 +79,9 @@
 							<p>
 								The "Mood" format, rather than displaying the users "Mood" towards the weather, reflects the weathers "Mood" towards the user, giving a more interesting impression on what the data is, because at the end of the day, its just numbers.
 							</p>
+							<p>
+								This is not a prediction App, this displays realtime information!
+							</p>
 
 						</div>
 					</div>
@@ -104,23 +107,37 @@
 				<div class="Lbox-2 concep howitworks">
 					<h3>Interfaces</h3>
 					<div class="words">
-
-						<p>Origonal Concept</p>
-
+						<p>
+							The one and only Concept
+						</p>
 					</div>
 					<img src="resources/origonal.png"/>
 					<div class="words">
 
-						<p>fsfnadlcsdbglwfsfcsdz
-						aduefbslkanbFLS
-						QFSKVGBWLSKGBSLKFB</p>
+						<p>
+							Unfortunatly there was only one way to display this data into a "Mood", Colour! and the best way to display this colour is to be simplistic.
+						</p>
+						<p>
+							This app would use the full-screen functionality of any device (except desktop, but they can hae widgets!)
+							Since this would become cluttered with different data dots, depending on user preferences, the app needed to also have a simplistic menu and navigation structure. What isn't specfically showen in this concept is the ability to conver those icons in the middle to thier raw data (for the nerds out there :p). 
+						</p>
 
 					</div>
 					<!-- <img src="resources/Moody.png"/> -->
 				</div>
-				<div class="Lbox-2 devel">
+				<div class="Lbox-2 devel howitworks">
 					<h3>Customizable interface</h3>
-					<img src="resources/Moody.png"/>
+					<img src="resources/Customizable.png"/>
+					<div class="words">
+
+							<p>
+								A function that has been on my mind is the ability to customize the dot shapes, and maybe even get rid of the display icons altogether. The way users would interact with this, users will be able to press and hold their chosen dot, and select from a variaty of relevant shapes with a simple swipe of a finger.
+							</p>
+							<p>
+								However, doing this, the dots will have to be structured in a specific form, to avoid selecting the wrong dot, and or icon. 
+							</p>
+
+						</div>
 				</div>
 				<div class="Lbox-2 expir">
 					<button class="getLocation"><img src="resources/icon.png"></button>
@@ -133,6 +150,19 @@
 					</div>
 						
 					<div id="weatherTime"></div>
+				</div>
+				<div id="sensor" class="Lbox-2 expir">
+					<h3>Mobile Sensor Card</h3>
+					<!-- <img src="resources/Moody.png"/> -->
+					<div class="lightlevel"></div>
+					
+					<div class="words">
+
+						<p>
+							This card represents data that is used from mobile sensors and cannot be used on a desktop.
+						</p>
+
+					</div>
 				</div>
 			</div>
 			<div class="column-middle">
@@ -149,7 +179,14 @@
 						<div class="words">
 
 							<p>
-								ewfbk
+								Moody weather reacts to realtime data from the weather services database on the cloud and converts it to colour, aka "Mood". From here it converts this data (numbers) into the a specific format of colours, e.g. if its sunny the dot will be yellow. Different colour densities mean different thing, depending on how high or low the data is.
+							</p>
+							<p>
+								For instance the higher the wind velocity, the greyer the wind dot is. Of course this doesnt mean its restricted to grey, going back to the sunny dot, if its rather cloudy out there perhaps the dot will turn slighly blue (meaning its getting colder!).
+							</p>
+							<p>
+								You are able to retrive your location data and compare it with other location data, just in case you dont know what to wear when you go to town!
+								Dispite this functionality, not only can you retrieve weather information from the cloud, you can also upload this data using your mobile device sensors to convert your device into a weather station (sorry desktop users!). This provide even more data to not only yu but the services that use it!
 							</p>
 
 						</div>
@@ -172,33 +209,63 @@
 						</div>
 					</div>
 				</div>
-				<div class="Lbox-2 concep">
+				<div class="Lbox-2 concep howitworks">
 					<h3>Mobile Networks</h3>
-					<img src="resources/Moody.png"/>
+					<img src="resources/MobileFunctionality.png"/>
+					<!-- <div class="information"> -->
+						<div class="words">
+
+							<p>
+								As mentioned, the way this will be used on mobile is retrieving and sending information. The data is rerieved from the cloud and sent to the phone, but is also is able to use the sensors on your mobile to send realtime data back to the cloud and update it. Also users will be able to set the app as a background or other means.
+							</p>
+						
+						</div>
+					<!-- </div> -->
+					<img src="resources/MobileInterface1.png"/>
+					<img src="resources/MobileInterface2.png"/>
 					<div class="words">
 
-						<p>fsfnadlcsdbglwfsfcsdz
-						aduefbslkanbFLS
-						QFSKVGBWLSKGBSLKFB</p>
+						<p>
+							The user interaction, with the inclusion of the previous interface discription, are as follows:
+						</p>
+						<p>
+							-The user is able to retrieve thier location data
+						</p>
+						<p>
+							-Swipe to another section that has been set another location by the user
+						</p>
+						<p>
+							-Edit the amount of data displayed
+						</p>
+						<p>
+							-Edit data dot shape
+						</p>
+						<p>
+							-Search up realtime data of a specific location using the title displayed at the top of the screen.
+						</p>
 						
 					</div>
-					<img src="resources/Moody.png"/>
-					<div class="words">
-
-						<p>fsfnadlcsdbglwfsfcsdz
-						aduefbslkanbFLS
-						QFSKVGBWLSKGBSLKFB</p>
-						
-					</div>
+					<img src="resources/MobileInterface3.png"/>
 				</div>
-				<div class="Lbox-2 devel">
+				<div class="Lbox-2 devel howitworks">
 					<h3>Desktop Networks</h3>
-					<img src="resources/Moody.png"/>
+					<img src="resources/Desktop.png"/>
+					<div class="information">
+						<div class="words">
+							<p>
+								This card displays the interaction between mobile, desktop and the cloud. However desktop is not able to use the mobile sensors to send data to the cloud, only retrieve it. Desktop is however able to still retrieve thier specific geo-location.
+							</p>
+							<p>
+								Also here is a widget design, incase users want to see it at all times, rather than use the website.
+							</p>
+						</div>
+					</div>
+					<img src="resources/Widget.png"/>
 				</div>
 				<div id="video" class="Lbox-2 expir">
 					<h3>Mobile Experiment Card</h3>
 					<!-- <img src="resources/Moody.png"/> -->
-					<div class="lightlevel"></div>
+					<!-- <div class="lightlevel"></div> -->
 					<div   class="video">
 						<iframe src="https://www.youtube.com/embed/fRRKuI0Gxa8" frameborder="0" allowfullscreen></iframe>
 					</div>
