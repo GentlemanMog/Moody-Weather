@@ -32,7 +32,7 @@ deal.style.transform = "rotate(" + tiltRL + "deg) rotate3d(1,0,0, " + (tiltBF * 
 var luminOver;
 var magneticflux = 0;
 
-window.addEventListener("levellight", function(event){
+window.addEventListener('devicelight', function(event){
 	// alert(e.value);
 	var luminosity = event.value;
 	// showLuminosity(luminosity);
