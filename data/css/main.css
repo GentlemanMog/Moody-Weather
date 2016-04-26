@@ -3,10 +3,10 @@
 	src: url(font/UNDATAME.ttf);
 
 }
-@font-face{
+/*@font-face{
 	font-family: jonnyboy;
 	src: url(font/CRACJ.ttf);
-}	
+}	*/
 body{
 	background: #0D0D0D;
 	padding:100px 0;

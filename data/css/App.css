@@ -5,20 +5,48 @@
 body{
 	background: #262626;
 	font-family: dataerror;
-	padding:100px 0;
-	position: relative;
+	padding: 0 0;
+	margin: 0;
+	/*position: relative;*/
 	display: block;
 	/*color: white;*/
 	text-align: center;
+	color: indigo;
+	overflow: hidden;
+	height: 100%;
 }
+canvas{
+	width: 100%;
+	height: 100%;
+	/*border: 1px solid crimson;*/
+}
+.headsup{
+	position: absolute;
+	margin-top: 0px;
+	opacity: 0.3;
+	color: red;
+}
+.headsup p{
+	position: absolute;
+	margin-left: 80%;
+	margin-top: -20px;
+}
+
 .TheMood{
-	position: relative;
-	display: block;
+	position: absolute;
+	/*float: left;*/
 	background: grey;
-	width: 500px;
+	width: 100%;
 	font-size: 50px;
 	padding: 50px 0;
-	margin-left: 39%;
+	/*margin-left: 50%;*/
 	margin-top: 20%;
-	box-shadow: 0px 0px 87px 14px rgba(0,0,0,0.75);
+	/*box-shadow: 0px 0px 87px 14px rgba(0,0,0,0.75);*/
+}
+.triDtest{
+	position: absolute;
+	background-color: #000;
+	width: 100%;
+	height: 100vh;
+	/*border: 1px solid crimson;*/
 }
