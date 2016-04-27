@@ -1,12 +1,15 @@
 //Initialize
+
+if("geolocation" in navigator){
+	$('.js-geolocation').show();
+}
+else{
+	$('.js-geolocation').hide();
+}
+
 var currentWeather = 'Honolulu';
 var woeid = '';
-$("#button").on('click', function(){
-	navigator.geolocation.getCurrentPosition(function(position){
-		currentWeather = position.coords.latitude;
-		woeid = position.coords.longitude;
-	});
-});
+
 
 // console.log(currentWeather, woeid);
 init();
@@ -279,6 +282,13 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				function render() {
 					mesh1.rotation.z += 0.01;
 					// mesh1.rotation.y += 0.01;
+
+				$("#button").on('click', function(){
+					navigator.geolocation.getCurrentPosition(function(position){
+						currentWeather = position.coords.latitude;
+						woeid = position.coords.longitude;
+					});
+				});
 
 					// window.addEventListener('devicelight', function(event){
 					// 	var prox = event.value;
