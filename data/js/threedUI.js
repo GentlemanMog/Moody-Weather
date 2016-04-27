@@ -10,7 +10,13 @@ else{
 var currentWeather = 'Honolulu';
 var woeid = '';
 
-
+$("#button").on('click', function(){
+	navigator.geolocation.getCurrentPosition(function(position){
+		currentWeather = position.coords.latitude;
+		woeid = position.coords.longitude;
+	});
+	// currentWeather = 'London'
+});
 // console.log(currentWeather, woeid);
 init();
 animate();
@@ -63,7 +69,35 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 	var renderToggle = false;
 	
 	var glitchPass, bloomPass;
-	var geometry, material;
+	var geometry;
+	var material = [
+					new THREE.MeshBasicMaterial({
+						color: 0x1F1F1F, 
+						wireframe: false
+					}),
+					new THREE.MeshBasicMaterial( { 
+						color: 0xFF3399, 
+						wireframe: true ,
+						// blending: THREE.AdditiveBlending,
+						depthWrite:false,
+						depthTest:false,
+						transparent:false,
+						opacity:1,
+						wireframeLinewidth: 50
+						// side: THREE.DoubleSide
+					} ),
+					new THREE.MeshBasicMaterial( { 
+						color: 0xFF3399, 
+						wireframe: false ,
+						// blending: THREE.AdditiveBlending,
+						depthWrite:false,
+						depthTest:false,
+						transparent:false,
+						opacity:1,
+						wireframeLinewidth: 50,
+						side: THREE.DoubleSide
+					} )
+				];
 
 	var radius = 400;
 
@@ -108,48 +142,22 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		var canvas = document.createElement( 'canvas' ); 
 			
 		geometry = new THREE.PlaneGeometry(8000, 2000, 0);
-		material = new THREE.MeshBasicMaterial({color: 0x1F1F1F, wireframe: false});
 		// material.color.setHex( Math.random() * 0xffffff);
-		mesh = new THREE.Mesh(geometry, material);
+		mesh = new THREE.Mesh(geometry, material[0]);
 		scene.add(mesh);
 
 		// geometry = new THREE.RingGeometry( radius*.7,radius, 3,3, 3, Math.PI*2);
 		geometry = new THREE.OctahedronGeometry(radius*.7, 1)
 		// geometry.rotation.y = Math.random()*Math.PI;
-		material = new THREE.MeshBasicMaterial( { 
-			color: 0xFF3399, 
-			wireframe: true ,
-			// blending: THREE.AdditiveBlending,
-			depthWrite:false,
-			depthTest:false,
-			transparent:false,
-			opacity:1,
-			wireframeLinewidth: 50
-			// side: THREE.DoubleSide
-		} );
-		dynamicColor(material, currentWeather, woeid, 'temp');
 
-
-		var mesh = new THREE.Mesh(geometry, material);
+		var mesh = new THREE.Mesh(geometry, material[1]);
 		mesh1.add(mesh);
 		scene.add(mesh1);
 
 		geometry = new THREE.CircleGeometry( 200*.7,radius, 100, 100, 8, Math.PI*2);
 		geometry.translate(50, 400, 100);
-		material = new THREE.MeshBasicMaterial( { 
-		color: 0xFF3399, 
-		wireframe: false ,
-		// blending: THREE.AdditiveBlending,
-		depthWrite:false,
-		depthTest:false,
-		transparent:false,
-		opacity:1,
-		wireframeLinewidth: 50,
-		side: THREE.DoubleSide
-		} );
-		dynamicColor(material, currentWeather, woeid, 'humidity');
-
-		var mesh = new THREE.Mesh(geometry, material);
+		
+		var mesh = new THREE.Mesh(geometry, material[2]);
 		mesh1.add(mesh);
 		scene.add(mesh1);
 
@@ -283,6 +291,9 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 					mesh1.rotation.z += 0.01;
 					// mesh1.rotation.y += 0.01;
 
+					dynamicColor(material[1], currentWeather, woeid, 'temp');
+					dynamicColor(material[2], currentWeather, woeid, 'humidity');
+
 					// window.addEventListener('devicelight', function(event){
 					// 	var prox = event.value;
 					// 	mesh1.scale.set(prox/2, prox/2, prox/2);
@@ -306,16 +317,10 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 function dynamicColor(material, location, woeid, type){
 
-	$("#button").on('click', function(){
-		navigator.geolocation.getCurrentPosition(function(position){
-			location = position.coords.latitude;
-			woeid = position.coords.longitude;
-		});
-	});
 
 	var color;
 	var currentColor;
-	
+
 	$.simpleWeather({
 		location: location,
 		woeid: woeid,
@@ -366,8 +371,8 @@ function dynamicColor(material, location, woeid, type){
 					color = new THREE.Color("#C9C31B");
 					material.color.set(color);
 				}else{
-					// color = new THREE.Color("#00299b");
-					// material.color.set(color);
+					color = new THREE.Color("#00299b");
+					material.color.set(color);
 				}
 			}else{
 
