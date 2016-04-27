@@ -10,13 +10,16 @@ else{
 var currentWeather = 'Honolulu';
 var woeid = '';
 
-$("#button").on('click', function(){
-	navigator.geolocation.getCurrentPosition(function(position){
-		currentWeather = position.coords.latitude;
-		woeid = position.coords.longitude;
+$(document).ready(function(){
+	$("#button").on('click', function(){
+		navigator.geolocation.getCurrentPosition(function(position){
+			currentWeather = position.coords.latitude + ',' + position.coords.longitude;
+			// woeid = position.coords.longitude;
+		});
+		// currentWeather = 'Wellington'
 	});
-	// currentWeather = 'London'
 });
+
 // console.log(currentWeather, woeid);
 init();
 animate();
@@ -94,8 +97,8 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 						depthTest:false,
 						transparent:false,
 						opacity:1,
-						wireframeLinewidth: 50,
-						side: THREE.DoubleSide
+						wireframeLinewidth: 10,
+						// side: THREE.DoubleSide
 					} )
 				];
 
@@ -179,9 +182,9 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// united.addPass (bloomPass);
 
 	//GlitchPass effect
-		glitchPass = new THREE.GlitchPass();
-		// glitchPass.renderToScreen = true;
-		united.addPass (glitchPass);
+		// glitchPass = new THREE.GlitchPass();
+		// // glitchPass.renderToScreen = true;
+		// united.addPass (glitchPass);
 
 	//FilmShader
 		// effect = new THREE.ShaderPass(THREE.FilmShader);
@@ -327,7 +330,7 @@ function dynamicColor(material, location, woeid, type){
 		unit: 'c',
 		success: function(weather){
 			if(type == 'temp'){
-				console.log(weather.temp);
+				// console.log(weather.temp);
 				if (weather.alt.temp < 5) {
 					color = new THREE.Color("#4A8BCC");
 					material.color.set(color);
@@ -344,7 +347,7 @@ function dynamicColor(material, location, woeid, type){
 					color = new THREE.Color("#52302E");
 					material.color.set(color);
 				}else if (weather.temp < 30) {
-					color = new THREE.Color("#7F0800");
+					color = new THREE.Color("#A22607");
 					material.color.set(color);
 				}else{
 					// color = new THREE.Color("#00299b");
@@ -352,22 +355,22 @@ function dynamicColor(material, location, woeid, type){
 				}
 			}else if(type == 'humidity'){
 				console.log(weather.humidity);
-				if (weather.humidity > 76) {
+				if (weather.humidity < 90) {
 					color = new THREE.Color("#B0434F");
 					material.color.set(color);
-				}else if (weather.humidity < 75) {
+				}else if (weather.humidity < 80) {
 					color = new THREE.Color("#965C63");
 					material.color.set(color);
 				}else if (weather.humidity < 70) {
 					color = new THREE.Color("#00299b");
 					material.color.set(color);
-				}else if (weather.humidity < 20) {
+				}else if (weather.humidity < 60) {
 					color = new THREE.Color("#BDCCD2");
 					material.color.set(color);
-				}else if (weather.humidity < 25) {
+				}else if (weather.humidity < 50) {
 					color = new THREE.Color("#C4C394");
 					material.color.set(color);
-				}else if (weather.humidity < 30) {
+				}else if (weather.humidity < 40) {
 					color = new THREE.Color("#C9C31B");
 					material.color.set(color);
 				}else{
@@ -383,10 +386,10 @@ function dynamicColor(material, location, woeid, type){
 		}
 	});
 	
-	tween = new TWEEN.Tween(material.color)
-	.to({r:0, g:25, b:155}, 2000)
-	.easing(TWEEN.Easing.Quartic.In)
-	.start()
+	// tween = new TWEEN.Tween(material.color)
+	// .to({r:0, g:25, b:155}, 2000)
+	// .easing(TWEEN.Easing.Quartic.In)
+	// .start()
 	
 	// console.log(material.color.getHex());
 }
