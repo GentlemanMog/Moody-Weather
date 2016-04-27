@@ -50,3 +50,26 @@ canvas{
 	height: 100vh;
 	/*border: 1px solid crimson;*/
 }
+.textfield{
+	position: absolute;
+	display: block;
+	background: white;
+	width: 50%;
+	height: 50px;
+	/*padding: 3px 0;*/
+	margin-top: 700px;
+	margin-left: 25%;
+}
+.textfield form{
+	display: block;
+	padding: 5px;
+	height: 85%;
+}
+.textfield form input{
+	text-align: center;
+	font-family: dataerror;
+	font-size: 40px;
+	display: block;
+	width: 98%;
+	height: 88%;
+}

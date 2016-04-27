@@ -1,5 +1,14 @@
 //Initialize
-var tween;
+var currentWeather = 'Honolulu';
+var woeid = '';
+$("#button").on('click', function(){
+	navigator.geolocation.getCurrentPosition(function(position){
+		currentWeather = position.coords.latitude;
+		woeid = position.coords.longitude;
+	});
+});
+
+// console.log(currentWeather, woeid);
 init();
 animate();
 
@@ -95,19 +104,18 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
    		//Set a canvas to every div in the array
 		var canvas = document.createElement( 'canvas' ); 
 			
-		// geometry = new THREE.PlaneGeometry(8000, 2000, 0);
-		// material = new THREE.MeshBasicMaterial({color: 0xffff00, wireframe: false});
+		geometry = new THREE.PlaneGeometry(8000, 2000, 0);
+		material = new THREE.MeshBasicMaterial({color: 0x1F1F1F, wireframe: false});
 		// material.color.setHex( Math.random() * 0xffffff);
-		// // dynamicColor(material);
-		// mesh = new THREE.Mesh(geometry, material);
-		// scene.add(mesh);
+		mesh = new THREE.Mesh(geometry, material);
+		scene.add(mesh);
 
 		// geometry = new THREE.RingGeometry( radius*.7,radius, 3,3, 3, Math.PI*2);
 		geometry = new THREE.OctahedronGeometry(radius*.7, 1)
 		// geometry.rotation.y = Math.random()*Math.PI;
 		material = new THREE.MeshBasicMaterial( { 
 			color: 0xFF3399, 
-			wireframe: false ,
+			wireframe: true ,
 			// blending: THREE.AdditiveBlending,
 			depthWrite:false,
 			depthTest:false,
@@ -116,27 +124,27 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 			wireframeLinewidth: 50
 			// side: THREE.DoubleSide
 		} );
-		dynamicColor(material, 'Honolulu', '', 'temp');
+		dynamicColor(material, currentWeather, woeid, 'temp');
 
 
 		var mesh = new THREE.Mesh(geometry, material);
 		mesh1.add(mesh);
 		scene.add(mesh1);
 
-		geometry = new THREE.RingGeometry( radius*.7,radius, 100, 100, 8, Math.PI*2);
-
-		material = new THREE.MeshLambertMaterial( { 
+		geometry = new THREE.CircleGeometry( 200*.7,radius, 100, 100, 8, Math.PI*2);
+		geometry.translate(50, 400, 100);
+		material = new THREE.MeshBasicMaterial( { 
 		color: 0xFF3399, 
-		wireframe: true ,
+		wireframe: false ,
 		// blending: THREE.AdditiveBlending,
 		depthWrite:false,
 		depthTest:false,
 		transparent:false,
 		opacity:1,
-		wireframeLinewidth: 50
-		// side: THREE.DoubleSide
+		wireframeLinewidth: 50,
+		side: THREE.DoubleSide
 		} );
-		dynamicColor(material, 'Honolulu', '', 'humidity');
+		dynamicColor(material, currentWeather, woeid, 'humidity');
 
 		var mesh = new THREE.Mesh(geometry, material);
 		mesh1.add(mesh);
@@ -160,9 +168,9 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// united.addPass (bloomPass);
 
 	//GlitchPass effect
-		// glitchPass = new THREE.GlitchPass();
-		// // glitchPass.renderToScreen = true;
-		// united.addPass (glitchPass);
+		glitchPass = new THREE.GlitchPass();
+		// glitchPass.renderToScreen = true;
+		united.addPass (glitchPass);
 
 	//FilmShader
 		// effect = new THREE.ShaderPass(THREE.FilmShader);
@@ -270,13 +278,13 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 				function render() {
 					mesh1.rotation.z += 0.01;
-					mesh1.rotation.y += 0.01;
+					// mesh1.rotation.y += 0.01;
 
-					window.addEventListener('devicelight', function(event){
-						var prox = event.value;
-						mesh1.scale.set(prox/2, prox/2, prox/2);
-						$(".values").html("<p>" + prox + " Lux</p>");
-					}, false);
+					// window.addEventListener('devicelight', function(event){
+					// 	var prox = event.value;
+					// 	mesh1.scale.set(prox/2, prox/2, prox/2);
+					// 	$(".values").html("<p>" + prox + " Lux</p>");
+					// }, false);
 
 				//Update Virtualcamera for mouse movement
 					// virtualCamera.position.x = -mouseX * 3;
@@ -304,22 +312,22 @@ function dynamicColor(material, location, woeid, type){
 			if(type == 'temp'){
 				console.log(weather.temp);
 				if (weather.alt.temp < 5) {
-					color = new THREE.Color("#00299b");
+					color = new THREE.Color("#4A8BCC");
 					material.color.set(color);
 				}else if (weather.temp < 10) {
-					color = new THREE.Color("#00299b");
+					color = new THREE.Color("#33404C");
 					material.color.set(color);
 				}else if (weather.temp < 15) {
-					color = new THREE.Color("#00299b");
+					color = new THREE.Color("#8C8C85");
 					material.color.set(color);
 				}else if (weather.temp < 20) {
-					color = new THREE.Color("#00299b");
+					color = new THREE.Color("#8C6F6F");
 					material.color.set(color);
 				}else if (weather.temp < 25) {
-					color = new THREE.Color("#00299b");
+					color = new THREE.Color("#52302E");
 					material.color.set(color);
 				}else if (weather.temp < 30) {
-					color = new THREE.Color("#00299b");
+					color = new THREE.Color("#7F0800");
 					material.color.set(color);
 				}else{
 					// color = new THREE.Color("#00299b");
@@ -327,29 +335,28 @@ function dynamicColor(material, location, woeid, type){
 				}
 			}else if(type == 'humidity'){
 				console.log(weather.humidity);
-				if (weather.humidity < 5) {
+				if (weather.humidity > 76) {
+					color = new THREE.Color("#B0434F");
+					material.color.set(color);
+				}else if (weather.humidity < 75) {
+					color = new THREE.Color("#965C63");
+					material.color.set(color);
+				}else if (weather.humidity < 70) {
 					color = new THREE.Color("#00299b");
 					material.color.set(color);
+				}else if (weather.humidity < 20) {
+					color = new THREE.Color("#BDCCD2");
+					material.color.set(color);
+				}else if (weather.humidity < 25) {
+					color = new THREE.Color("#C4C394");
+					material.color.set(color);
+				}else if (weather.humidity < 30) {
+					color = new THREE.Color("#C9C31B");
+					material.color.set(color);
+				}else{
+					// color = new THREE.Color("#00299b");
+					// material.color.set(color);
 				}
-				//else if (weather.humidity < 10) {
-				// 	color = new THREE.Color("#00299b");
-				// 	material.color.set(color);
-				// }else if (weather.humidity < 15) {
-				// 	color = new THREE.Color("#00299b");
-				// 	material.color.set(color);
-				// }else if (weather.humidity < 20) {
-				// 	color = new THREE.Color("#00299b");
-				// 	material.color.set(color);
-				// }else if (weather.humidity < 25) {
-				// 	color = new THREE.Color("#00299b");
-				// 	material.color.set(color);
-				// }else if (weather.humidity < 30) {
-				// 	color = new THREE.Color("#00299b");
-				// 	material.color.set(color);
-				// }else{
-				// 	color = new THREE.Color("#00299b");
-				// 	material.color.set(color);
-				// }
 			}else{
 
 			}
