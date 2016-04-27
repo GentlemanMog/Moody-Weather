@@ -132,7 +132,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 			// side: THREE.DoubleSide
 		} );
 		
-		dynamicColor(material, 'Honolulu', '', 'temp');
+		// dynamicColor(material, 'Honolulu', '', 'temp');
 		$("#button").on('click', function(){
 			navigator.geolocation.getCurrentPosition(function(position){
 				dynamicColor(material, position.coords.latitude, position.coords.longitude, 'temp');
