@@ -133,11 +133,11 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		} );
 		
 		// dynamicColor(material, 'Honolulu', '', 'temp');
-		$("#button").on('click', function(){
+		// $("#button").on('click', function(){
 			navigator.geolocation.getCurrentPosition(function(position){
 				dynamicColor(material, position.coords.latitude, position.coords.longitude, 'temp');
 			});
-		});
+		// });
 		
 
 
