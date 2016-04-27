@@ -7,6 +7,8 @@ else{
 	$('.js-geolocation').hide();
 }
 
+var currentWeather = 'Honolulu';
+var woeid = '';
 
 
 // console.log(currentWeather, woeid);
@@ -65,16 +67,10 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 	var radius = 400;
 
-	var currentWeather = 'Honolulu';
-	var woeid = '';
-
-
 
 	init();
 
 	function init(){
-
-		
 
 		container = document.getElementById(containerID);
 		mesh1 = new THREE.Object3D();
@@ -131,14 +127,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 			wireframeLinewidth: 50
 			// side: THREE.DoubleSide
 		} );
-		
-		// dynamicColor(material, 'Honolulu', '', 'temp');
-		// $("#button").on('click', function(){
-			navigator.geolocation.getCurrentPosition(function(position){
-				dynamicColor(material, position.coords.latitude, position.coords.longitude, 'temp');
-			});
-		// });
-		
+		dynamicColor(material, currentWeather, woeid, 'temp');
 
 
 		var mesh = new THREE.Mesh(geometry, material);
@@ -316,8 +305,17 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 };
 
 function dynamicColor(material, location, woeid, type){
+
+	$("#button").on('click', function(){
+		navigator.geolocation.getCurrentPosition(function(position){
+			location = position.coords.latitude;
+			woeid = position.coords.longitude;
+		});
+	});
+
 	var color;
 	var currentColor;
+	
 	$.simpleWeather({
 		location: location,
 		woeid: woeid,
