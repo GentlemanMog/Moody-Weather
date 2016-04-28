@@ -100,7 +100,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 					} ),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
-						wireframe: false ,
+						wireframe: true ,
 						// blending: THREE.AdditiveBlending,
 						depthWrite:false,
 						depthTest:false,
@@ -160,8 +160,8 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		mesh1.add(mesh);
 		scene.add(mesh1);
 
-		geometry = new THREE.CircleGeometry( 200*.7,radius, 100, 100, 8, Math.PI*2);
-		geometry.translate(50, 400, 100);
+		geometry = new THREE.OctahedronGeometry( 200*.7,0);
+		geometry.translate(600, 400, 0);
 		
 		var mesh = new THREE.Mesh(geometry, material[2]);
 		mesh1.add(mesh);
@@ -295,13 +295,13 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				};
 
 				function render() {
-					mesh1.rotation.z += 0.01;
+					// mesh1.rotation.z += 0.01;
 					// mesh1.rotation.y += 0.01;
 
 					controls.update();
 
-					// dynamicColor(material[1], currentWeather, woeid, 'temp');
-					// dynamicColor(material[2], currentWeather, woeid, 'humidity');
+					dynamicColor(material[1], currentWeather, woeid, 'temp');
+					dynamicColor(material[2], currentWeather, woeid, 'humidity');
 
 					// window.addEventListener('devicelight', function(event){
 					// 	var prox = event.value;
