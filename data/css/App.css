@@ -50,26 +50,88 @@ canvas{
 	height: 100vh;
 	/*border: 1px solid crimson;*/
 }
-.textfield{
-	position: absolute;
-	display: block;
+.textField{
+	position: fixed;
 	background: white;
-	width: 50%;
-	height: 50px;
-	/*padding: 3px 0;*/
-	margin-top: 700px;
-	margin-left: 25%;
+	width: 450px;
+	/*height: 150px;*/
+	margin: 46% 38%;
+
 }
-.textfield form{
+.textField form{
 	display: block;
 	padding: 5px;
 	height: 85%;
 }
-.textfield form input{
+.textField form input{
 	text-align: center;
 	font-family: dataerror;
 	font-size: 40px;
 	display: block;
 	width: 98%;
 	height: 88%;
+}
+.locBox{
+	position: absolute;
+	/*border-radius: 200px;*/
+	width: 150px;
+	height: 150px;
+	padding: 5px 0;
+	margin: 20px;
+	/*background-color: #1F1F1F;*/
+}
+.locBox button{
+	opacity: 0.4;
+	border-radius: 200px;
+}
+.locBox img{
+	width: 100%;
+	/*background: #1F1F1F;*/
+	opacity: 0.8;
+}
+
+@media only screen and (max-width: 1280px) {
+	.textField{
+		position: fixed;
+		background: white;
+		width: 450px;
+		/*height: 150px;*/
+		margin: 80% 28%;
+	}
+}
+@media all and (max-width: 1024px) {
+	.textField{
+		position: fixed;
+		background: white;
+		width: 450px;
+		/*height: 150px;*/
+		margin: 80% 25%;
+	}
+}
+@media all and (max-width:800px) {
+	.textField{
+		position: fixed;
+		background: white;
+		width: 450px;
+		/*height: 150px;*/
+		margin: 110% 15%;
+	}
+}
+@media all and (max-width:640px) {
+	.textField{
+		position: fixed;
+		background: white;
+		width: 450px;
+		/*height: 150px;*/
+		margin: 110% 15%;
+	}
+}
+@media all and (max-width:320px) {
+	.textField{
+		position: fixed;
+		background: white;
+		width: 450px;
+		/*height: 150px;*/
+		margin: 110% 10%;
+	}
 }
