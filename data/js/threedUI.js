@@ -129,7 +129,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// camera.position.y = 100;
 		camera.position.z = 1000;
 		// camera.setViewOffset(fullWidth, fullHeight, viewX, viewY, viewWidth, viewHeight);
-		controls = new THREE.DeviceOrientationControls( camera );
+		
 
 	//Important scene initialization
 		scene = new THREE.Scene();
@@ -166,6 +166,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		var mesh = new THREE.Mesh(geometry, material[2]);
 		mesh1.add(mesh);
 		scene.add(mesh1);
+		controls = new THREE.DeviceOrientationControls( mesh1 );
 
 	//Renderer setup
 		renderer = new THREE.WebGLRenderer({ anialias: true });
