@@ -7,27 +7,40 @@ else{
 	$('.js-geolocation').hide();
 }
 
-if(window.DeviceMotionEvent){
-	window.addEventListener("devicemotion", function(){
-		var tiltRL = eventData.acceleration.x * 2;
-		var tiltBF = eventData.acceleration.y * 2;
-		// var dir = eventData.alpha;
-		deviceOrientationHandler(tiltRL, tiltBF, dir);
-	}, false);
-}
+// var isLight, isOrient, isTemp, isHumid, isMagnetic, isPressure;
+// var lux, degC, humid, flux, press;
+
+// window.addEventListener("temperature", function (value) {
+//     isTemp = true;
+//     degC = value;
+// }, false);
+// window.addEventListener("devicelight", function (value) {
+//     isLight = true;
+//     lux = value;
+// }, false);
+// window.addEventListener("humidity", function (value) {
+//     isHumid = true;
+//     humid = value;
+// }, false);
+// window.addEventListener("humidity", function (value) {
+//     isHumid = true;
+//     humid = value;
+// }, false);
+
 
 var currentWeather = 'Honolulu';
 var woeid = '';
 
 $(document).ready(function(){
 	setInterval(dynamicColor, 300000);
+
 	$(".getLocation").on('click', function(){
 		navigator.geolocation.getCurrentPosition(function(position){
 			currentWeather = position.coords.latitude + ',' + position.coords.longitude;
-			// woeid = position.coords.longitude;
 		});
 		// currentWeather = 'Wellington'
 	});
+
 });
 
 // console.log(currentWeather, woeid);
@@ -136,37 +149,39 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 		light = new THREE.DirectionalLight( 0xffffff );
 		// light.position.set( 0, 0, 1 ).normalize();
-		scene.add( light );
-
-		// THREEx.WindowResize(renderer, camera);
-
-			light.position.x = Math.random() - 0.5;
-   			light.position.y = Math.random() - 0.5;
-   			light.position.z = Math.random() - 0.5;
+			// light.position.x = Math.random() - 0.5;
+  			// light.position.y = Math.random() - 0.5;
+  			// light.position.z = Math.random() - 0.5;
+  		scene.add( light );
 
    		//Set a canvas to every div in the array
 		var canvas = document.createElement( 'canvas' ); 
-			
+
+
+	//Background	
 		geometry = new THREE.PlaneGeometry(8000, 2000, 0);
 		// material.color.setHex( Math.random() * 0xffffff);
 		mesh = new THREE.Mesh(geometry, material[0]);
 		scene.add(mesh);
 
-		// geometry = new THREE.RingGeometry( radius*.7,radius, 3,3, 3, Math.PI*2);
+	//Temperature
 		geometry = new THREE.OctahedronGeometry(radius*.7, 1)
 		// geometry.rotation.y = Math.random()*Math.PI;
-
 		var mesh = new THREE.Mesh(geometry, material[1]);
 		mesh1.add(mesh);
 		scene.add(mesh1);
 
+	//Humidity
 		geometry = new THREE.OctahedronGeometry( 200*.7,0);
-		geometry.translate(600, 400, 0);
+		geometry.translate(230, 0, 0);
 		
 		var mesh = new THREE.Mesh(geometry, material[2]);
 		mesh1.add(mesh);
 		scene.add(mesh1);
-		controls = new THREE.DeviceOrientationControls( mesh1 );
+
+
+		
+		controls = new THREE.DeviceOrientationControls( mesh1, true);
 
 	//Renderer setup
 		renderer = new THREE.WebGLRenderer({ anialias: true });
@@ -234,45 +249,6 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		//When Reloaded change the rotation of the mesh to a rantom rotation
 		mesh1.rotation.z = Math.random()*Math.PI;
 
-		//Mouse fucntions
-			// function onDocumentMouseMove ( event ) {
-
-			// 		mouseX = ( event.clientX - windowHalfX );
-			// 		mouseY = ( event.clientY - windowHalfY );
-
-			// 	}
-
-			// 	function onDocumentMouseWheel ( event ) {
-
-			// 		var delta = 0;
-
-			// 		if ( event.wheelDelta ) {
-
-			// 			delta = event.wheelDelta / 120;
-			// 			if ( window.opera ) delta = -delta;
-
-			// 		} else if ( event.detail ) {
-
-			// 			delta = -event.detail / 3;
-
-			// 		}
-
-			// 		if ( delta ) {
-
-			// 			if ( delta < 0 ) {
-
-			// 				cameraZ -= 100;
-
-			// 			} else {
-
-			// 				cameraZ += 100;
-
-			// 			}
-
-			// 		}
-
-			// 	}
-
 		//update render time
 			function update() {
 				rendertime += 0.01;
@@ -295,13 +271,13 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				};
 
 				function render() {
-					// mesh1.rotation.z += 0.01;
-					// mesh1.rotation.y += 0.01;
+					mesh1.rotation.z += 0.01;
+					mesh1.rotation.y += 0.01;
 
-					controls.update();
+					// controls.update();
 
-					dynamicColor(material[1], currentWeather, woeid, 'temp');
-					dynamicColor(material[2], currentWeather, woeid, 'humidity');
+					// dynamicColor(material[1], currentWeather, woeid, 'temp');
+					// dynamicColor(material[2], currentWeather, woeid, 'humidity');
 
 					// window.addEventListener('devicelight', function(event){
 					// 	var prox = event.value;
