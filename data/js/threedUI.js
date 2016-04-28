@@ -180,9 +180,12 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		scene.add(mesh1);
 
 
-		
-		controls = new THREE.DeviceOrientationControls( mesh1, true);
+		if(window.addEventListener("deviceorientation", handleOrientation, true)){
+			controls = new THREE.DeviceOrientationControls( mesh1, true);
+		}else{
 
+		}
+		
 	//Renderer setup
 		renderer = new THREE.WebGLRenderer({ anialias: true });
 		// renderer.setSize(1920,1080);
@@ -271,9 +274,14 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				};
 
 				function render() {
-					mesh1.rotation.z += 0.01;
-					mesh1.rotation.y += 0.01;
+					
 
+					if(window.addEventListener("deviceorientation", handleOrientation, true)){
+						controls.update();
+					}else{
+						mesh1.rotation.z += 0.01;
+						mesh1.rotation.y += 0.01;
+					}
 					// controls.update();
 
 					// dynamicColor(material[1], currentWeather, woeid, 'temp');
@@ -368,4 +376,7 @@ function dynamicColor(material, location, woeid, type){
 	// .start()
 	
 	// console.log(material.color.getHex());
+}
+function handleOrientation(event){
+
 }
