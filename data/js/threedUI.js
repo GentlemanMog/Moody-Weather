@@ -7,11 +7,21 @@ else{
 	$('.js-geolocation').hide();
 }
 
+if(window.DeviceMotionEvent){
+	window.addEventListener("devicemotion", function(){
+		var tiltRL = eventData.acceleration.x * 2;
+		var tiltBF = eventData.acceleration.y * 2;
+		// var dir = eventData.alpha;
+		deviceOrientationHandler(tiltRL, tiltBF, dir);
+	}, false);
+}
+
 var currentWeather = 'Honolulu';
 var woeid = '';
 
 $(document).ready(function(){
-	$("#button").on('click', function(){
+	setInterval(dynamicColor, 300000);
+	$(".getLocation").on('click', function(){
 		navigator.geolocation.getCurrentPosition(function(position){
 			currentWeather = position.coords.latitude + ',' + position.coords.longitude;
 			// woeid = position.coords.longitude;
@@ -46,7 +56,6 @@ function init(){
 
 function animate(){
 	canvas.animate();
-
 	requestAnimationFrame(animate);
 }
 
@@ -55,8 +64,8 @@ function animate(){
 function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, viewHeight){
 	var container, stats;
 	
-	var virtualCamera, scene, renderer, united;
-	var camera;
+	var scene, renderer, united;
+	var camera, controls;
 
 	var mesh1, light;
 
@@ -120,16 +129,10 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// camera.position.y = 100;
 		camera.position.z = 1000;
 		// camera.setViewOffset(fullWidth, fullHeight, viewX, viewY, viewWidth, viewHeight);
-
-	//Setup for virtual camera, for the illusion of movement. Attaches camera to the mouselistener
-		// virtualCamera = new THREE.Camera();
-		// virtualCamera.add( camera );
-		// virtualCamera.position.z = cameraZ;
+		controls = new THREE.DeviceOrientationControls( camera );
 
 	//Important scene initialization
 		scene = new THREE.Scene();
-
-		// scene.add(virtualCamera);
 
 		light = new THREE.DirectionalLight( 0xffffff );
 		// light.position.set( 0, 0, 1 ).normalize();
@@ -183,7 +186,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 	//GlitchPass effect
 		// glitchPass = new THREE.GlitchPass();
-		// // glitchPass.renderToScreen = true;
+		// glitchPass.renderToScreen = true;
 		// united.addPass (glitchPass);
 
 	//FilmShader
@@ -217,7 +220,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 	//Colour displacment Shader
 		// effect = new THREE.ShaderPass( THREE.RGBShiftShader );
-		// // effect.uniforms[ 'amount' ].value = 0.07;	
+		// // effect.uniforms[ 'amount' ].value = 0.01;	
 		// united.addPass( effect );
 
 		effect.renderToScreen = true;
@@ -285,7 +288,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				
 			//update renderer camera and Passes
 				this.animate = function() {
-
+					// controls.update();
 					render();
 
 				};
@@ -294,20 +297,16 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 					mesh1.rotation.z += 0.01;
 					// mesh1.rotation.y += 0.01;
 
-					dynamicColor(material[1], currentWeather, woeid, 'temp');
-					dynamicColor(material[2], currentWeather, woeid, 'humidity');
+					controls.update();
+
+					// dynamicColor(material[1], currentWeather, woeid, 'temp');
+					// dynamicColor(material[2], currentWeather, woeid, 'humidity');
 
 					// window.addEventListener('devicelight', function(event){
 					// 	var prox = event.value;
 					// 	mesh1.scale.set(prox/2, prox/2, prox/2);
 					// 	$(".values").html("<p>" + prox + " Lux</p>");
 					// }, false);
-
-				//Update Virtualcamera for mouse movement
-					// virtualCamera.position.x = -mouseX * 3;
-					// virtualCamera.position.y = -mouseY *-3;
-					// virtualCamera.position.z = cameraZ;
-					// virtualCamera.lookAt( scene.position );
 
 					camera.position.x += ( mouseX - camera.position.x ) * 0.02;
 					camera.position.y += ( - mouseY - camera.position.y ) * 0.02;
@@ -354,7 +353,7 @@ function dynamicColor(material, location, woeid, type){
 					// material.color.set(color);
 				}
 			}else if(type == 'humidity'){
-				console.log(weather.humidity);
+				// console.log(weather.humidity);
 				if (weather.humidity < 90) {
 					color = new THREE.Color("#B0434F");
 					material.color.set(color);
