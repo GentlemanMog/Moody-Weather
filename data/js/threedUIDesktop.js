@@ -28,29 +28,20 @@ window.addEventListener("humidity", function (value) {
 }, false);
 
 
-
-var currentWeather;
+var currentWeather = 'Honolulu';
 var woeid = '';
-// $(document).ready(function(){
-	// setInterval(dynamicColor, 300000);
 
-	if($("#loctField").val().length > 0){
-		currentWeather = $("#loctField").val();
-	}else{
-		// currentWeather = ' ';
-	}
+$(document).ready(function(){
+	setInterval(dynamicColor, 300000);
 
 	$(".getLocation").on('click', function(){
 		navigator.geolocation.getCurrentPosition(function(position){
 			currentWeather = position.coords.latitude + ',' + position.coords.longitude;
 		});
+		// currentWeather = 'Wellington'
 	});
 
-	
-
-
-
-// });
+});
 
 // console.log(currentWeather, woeid);
 init();
@@ -89,7 +80,6 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 	var scene, renderer, united;
 	var camera, controls;
 
-	
 	var mesh1, light;
 
 	var mouseX = 0, mouseY = 0;
@@ -209,11 +199,11 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		scene.add(mesh1);
 
 
-		// if(window.addEventListener("deviceorientation", handleOrientation, true)){
+		if(window.addEventListener("deviceorientation", handleOrientation, true)){
 			controls = new THREE.DeviceOrientationControls( mesh1, true);
-		// }else{
+		}else{
 
-		// } 
+		}
 		
 	//Renderer setup
 		renderer = new THREE.WebGLRenderer({ anialias: true });
@@ -227,6 +217,10 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 	//Sets up a effectPass and pases everything in the group not the renderer
 		united = new THREE.EffectComposer(renderer);
 		united.addPass( new THREE.RenderPass(scene, camera));
+
+	//BloomPass ew gross
+		// bloomPass = new THREE.BloomPass();
+		// united.addPass (bloomPass);
 
 	//GlitchPass effect
 		// glitchPass = new THREE.GlitchPass();
@@ -250,6 +244,17 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// // // effect.renderToScreen = true;
 		// effect.uniforms['tDisp'].value = 50.0;
 		// united.addPass (effect);
+
+	//BadTV shader
+		// effect = new THREE.ShaderPass(THREE.BadTVShader);
+		// effect.uniforms['tDiffuse'].value = 1.0;
+		// effect.uniforms['time'].value = 1.0;
+		// effect.uniforms['distortion'].value = 2.5;
+		// effect.uniforms['distortion2'].value = 1.0;
+		// effect.uniforms['speed'].value = 0.1;
+		// effect.uniforms['rollSpeed'].value = 8.0;
+		// // effect.renderToScreen = true;
+		// united.addPass(effect);
 
 	//Colour displacment Shader
 		// effect = new THREE.ShaderPass( THREE.RGBShiftShader );
@@ -290,16 +295,17 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				function render() {
 					
 
-					// if(window.addEventListener("deviceorientation", handleOrientation, true)){
+					if(window.addEventListener("deviceorientation", handleOrientation, true)){
 						controls.update();
-					// }else{
+					}else{
 						mesh1.rotation.z += 0.01;
 						mesh1.rotation.y += 0.01;
-					// }
-		
-					dynamicColor(material[1], currentWeather, woeid, 'temp');
-					dynamicColor(material[2], currentWeather, woeid, 'humidity');
-					dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
+					}
+					// controls.update();
+
+					// dynamicColor(material[1], currentWeather, woeid, 'temp');
+					// dynamicColor(material[2], currentWeather, woeid, 'humidity');
+					// dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
 
 					// window.addEventListener('devicelight', function(event){
 					// 	var prox = event.value;
@@ -327,7 +333,7 @@ function dynamicColor(material, location, woeid, type){
 		woeid: woeid,
 		unit: 'c',
 		success: function(weather){
-			// console.log(weather.wind.chill)
+			console.log(weather.wind.chill)
 			if(type == 'temp'){
 				// console.log(weather.temp);
 				if (weather.alt.temp < 5) {
@@ -377,22 +383,22 @@ function dynamicColor(material, location, woeid, type){
 					material.color.set(color);
 				}
 			}else if (type == 'Wind chill'){
-				if (weather.wind.chill < 80) {
+				if (weather.wind.chill < 50) {
 					color = new THREE.Color("#B0434F");
 					material.color.set(color);
-				}else if (weather.alt.wind.chill < 70) {
+				}else if (weather.wind.chill < 40) {
 					color = new THREE.Color("#965C63");
 					material.color.set(color);
-				}else if (weather.wind.chill < 60) {
+				}else if (weather.wind.chill < 30) {
 					color = new THREE.Color("#00299b");
 					material.color.set(color);
-				}else if (weather.wind.chill < 50) {
+				}else if (weather.wind.chill < 20) {
 					color = new THREE.Color("#BDCCD2");
 					material.color.set(color);
-				}else if (weather.wind.chill < 40) {
+				}else if (weather.wind.chill < 10) {
 					color = new THREE.Color("#C4C394");
 					material.color.set(color);
-				}else if (weather.wind.chill < 30) {
+				}else if (weather.wind.chill < 0) {
 					color = new THREE.Color("#C9C31B");
 					material.color.set(color);
 				}else{
@@ -414,4 +420,7 @@ function dynamicColor(material, location, woeid, type){
 	// .start()
 	
 	// console.log(material.color.getHex());
+}
+function handleOrientation(event){
+
 }

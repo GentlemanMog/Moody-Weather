@@ -20,6 +20,12 @@ canvas{
 	height: 100%;
 	/*border: 1px solid crimson;*/
 }
+.wrap{
+	margin: 0 auto;
+	margin-left: 0;
+	transition: all .2s linear;
+	-webkit-transition:all .2s linear; 
+}
 .headsup{
 	position: absolute;
 	margin-top: 0px;
@@ -41,6 +47,7 @@ canvas{
 	padding: 50px 0;
 	/*margin-left: 50%;*/
 	margin-top: 20%;
+	margin-bottom: 5%;
 	/*box-shadow: 0px 0px 87px 14px rgba(0,0,0,0.75);*/
 }
 .triDtest{
@@ -53,9 +60,14 @@ canvas{
 .textField{
 	position: fixed;
 	background: white;
-	width: 450px;
+	width: 100%;
 	/*height: 150px;*/
-	margin: 46% 38%;
+	/*margin: 46% 38%;*/
+	/*float: right;*/
+	/*margin-left: 25%;*/
+	margin-top: 47%;
+	transition: all .2s linear;
+	-webkit-transition:all .2s linear; 
 
 }
 .textField form{
@@ -68,6 +80,7 @@ canvas{
 	font-family: dataerror;
 	font-size: 40px;
 	display: block;
+	margin-left: 10px;
 	width: 98%;
 	height: 88%;
 }
@@ -92,46 +105,29 @@ canvas{
 
 @media only screen and (max-width: 1280px) {
 	.textField{
-		position: fixed;
-		background: white;
-		width: 450px;
-		/*height: 150px;*/
-		margin: 80% 28%;
+		margin-top: 65%;
 	}
 }
 @media all and (max-width: 1024px) {
 	.textField{
-		position: fixed;
-		background: white;
-		width: 450px;
-		/*height: 150px;*/
-		margin: 80% 25%;
+		margin-top: 75%;
 	}
 }
 @media all and (max-width:800px) {
 	.textField{
-		position: fixed;
-		background: white;
-		width: 450px;
-		/*height: 150px;*/
-		margin: 110% 15%;
+		margin-top: 60%;
+	}
+	.textField form input{
+		margin-left: 2px;
 	}
 }
 @media all and (max-width:640px) {
 	.textField{
-		position: fixed;
-		background: white;
-		width: 450px;
-		/*height: 150px;*/
-		margin: 110% 15%;
+		margin-top: 110%;
 	}
 }
 @media all and (max-width:320px) {
 	.textField{
-		position: fixed;
-		background: white;
-		width: 450px;
-		/*height: 150px;*/
-		margin: 110% 10%;
+		margin-top: 170%;
 	}
 }
