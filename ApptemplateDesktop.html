@@ -12,7 +12,8 @@
 	</head>
 	
 	<body>
-
+		
+				<!-- <div class="header-top"> -->
 		<div id="triDtest" class="triDtest"></div>
 
 		<div class="headsup">
@@ -23,14 +24,20 @@
 		<div class="locBox">
 			<button class="getLocation"><img src="resources/icon.png"></button>			
 		</div>
-
+		<div class="locBox ambient">
+			<button class="getAmbient"><img src="resources/Sunny.png"></button>			
+		</div>
+		<div class="wrap">
+			<div class="header">
 		<div class="textField">
 			<form>
-				<input type="text" id="loctField" name="location" value="Wellington" maxlength='45'>
-				<div id="button">Get current location</div>
+				<input type="text" id="loctField" placeholder="Search a location" maxlength='45'>
+				<!-- <div id="button">Get current location</div> -->
 			</form>
 		</div>
-			
+				<!-- </div> -->
+			</div>
+		</div>
 		<!-- <div class="textfield">
 			<form>
 				<input type="text" id="loctField" name="location" value="Wellington" maxlength='45'>
@@ -59,21 +66,19 @@
 
     				<!-- ****Shaders**** -->
     <script src="data/js/threejs/shaders/CopyShader.js"></script>
-    <script src="data/js/threejs/shaders/ConvolutionShader.js"></script>
-    <script src="data/js/threejs/shaders/HorizontalBlurShader.js"></script>
-    <script src="data/js/threejs/shaders/VerticalBlurShader.js"></script>
     <script src="data/js/threejs/shaders/MirrorShader.js"></script>
     <script src="data/js/threejs/shaders/RGBShiftShader.js"></script>
     <script src="data/js/threejs/shaders/FilmShader.js"></script>
-    <script src="data/js/threejs/shaders/AsciiEffect.js"></script>
     <script src="data/js/threejs/shaders/DigitalGlitch.js"></script>
     <script src="data/js/threejs/shaders/BadTVShader.js"></script>
+    <script src="data/js/threejs/shaders/AdditiveBlendShader.js"></script>
+    <script src="data/js/threejs/shaders/ConvolutionShader.js"></script>
 
     				<!-- ****PostProcessing**** -->
+    <script src="data/js/threejs/postprocessing/BloomPass.js"></script>
     <script src="data/js/threejs/postprocessing/RenderPass.js"></script>
     <script src="data/js/threejs/postprocessing/ShaderPass.js"></script>
     <script src="data/js/threejs/postprocessing/MaskPass.js"></script> 
-    <script src="data/js/threejs/postprocessing/BloomPass.js"></script>
     <script src="data/js/threejs/postprocessing/EffectComposer.js"></script>
     <script src="data/js/threejs/postprocessing/GlitchPass.js"></script>
 
