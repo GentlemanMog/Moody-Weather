@@ -72,7 +72,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 	var scene, renderer, united;
 	var camera, controls;
 
-	
+	var daeFile;
 	var mesh1, light;
 
 	var mouseX = 0, mouseY = 0;
@@ -95,36 +95,36 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 					}),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
-						wireframe: true ,
+						wireframe: false ,
 						blending: THREE.AdditiveBlending,
 						depthWrite:false,
 						depthTest:false,
 						transparent:false,
-						opacity:1,
-						wireframeLinewidth: 50
-						// side: THREE.DoubleSide
+						opacity:0.5,
+						wireframeLinewidth: 50,
+						side: THREE.DoubleSide
 					} ),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
-						wireframe: true ,
+						wireframe: false ,
 						blending: THREE.AdditiveBlending,
 						depthWrite:false,
 						depthTest:false,
 						transparent:false,
-						opacity:1,
+						opacity:0.5,
 						wireframeLinewidth: 10,
-						// side: THREE.DoubleSide
+						side: THREE.DoubleSide
 					} ),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
-						wireframe: true ,
+						wireframe: false ,
 						blending: THREE.AdditiveBlending,
 						depthWrite:false,
 						depthTest:false,
 						transparent:false,
-						opacity:1,
+						opacity:0.5,
 						wireframeLinewidth: 10,
-						// side: THREE.DoubleSide
+						side: THREE.DoubleSide
 					} ),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
@@ -179,36 +179,44 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		mesh = new THREE.Mesh(geometry, material[0]);
 		scene.add(mesh);
 
-	//Temperature
-		geometry = new THREE.OctahedronGeometry(radius*.7, 1)
-		// geometry.rotation.y = Math.random()*Math.PI;
-		var mesh = new THREE.Mesh(geometry, material[1]);
-		mesh1.add(mesh);
-		scene.add(mesh1);
+	//Load Model
+		var loader = new THREE.ColladaLoader();
+			
+			loader.load('resources/weather-node.dae', function (collada){
+				// console.log(collada.scene);
+				collada.scene.traverse( function(child) {
 
-	//Humidity
-		geometry = new THREE.OctahedronGeometry( 200*.7,0);
-		geometry.translate(230, 0, 0);
-		
-		var mesh = new THREE.Mesh(geometry, material[2]);
-		mesh1.add(mesh);
-		scene.add(mesh1);
+        			// console.log(child);
+        		if (child.material) {
+        			if ( child.material.name === 'Temp' || child.material.name === 'Temp2') {
+        				child.material = material[1];
+        			}else if (child.material.name === 'Humid' || child.material.name === 'Humid2') {
+        				child.material = material[2];
+        			}else if (child.material.name === 'Windy' || child.material.name === 'Windy2'){
+        				child.material = material[3];
+        			}
 
-	//Wind chill
-		geometry = new THREE.TorusKnotGeometry( 150*.7,20, 30, 3);
-		geometry.translate(-230, 0, 450);
-		
-		var mesh = new THREE.Mesh(geometry, material[3]);
-		mesh1.add(mesh);
-		scene.add(mesh1);
+        		}
+        		
+        		if( child instanceof THREE.Mesh ) {
+        			//sets a new material to the model
+           				// child.material = material[1];
 
-	//Wind Speed
-		geometry = new THREE.TorusKnotGeometry( 150*.7,20, 30, 3);
-		geometry.translate(-100, 180, 450);
-		
-		var mesh = new THREE.Mesh(geometry, material[4]);
-		mesh1.add(mesh);
-		scene.add(mesh1);
+        			//scales the model to the appropriate size
+           				child.scale.set(20,20,20);
+
+           				console.log(child.material);
+
+           			//Adds the mesh to the scene
+            			mesh1.add( child );
+        				scene.add(mesh1);
+        			}
+        			
+    			});
+
+
+
+			});
 
 
 	//Gyroscope Controls THREEJS
@@ -235,7 +243,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// bloomPass = new THREE.BloomPass(3,12,2.0,1512);
 		// united.addPass (bloomPass);
 	//GlitchPass effect
-		glitchPass = new THREE.GlitchPass();
+		// glitchPass = new THREE.GlitchPass();
 		// glitchPass.renderToScreen = true;
 		
 
@@ -268,6 +276,10 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		// document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
 		
+		dynamicColor(material[1], currentWeather, woeid, 'temp');
+		dynamicColor(material[2], currentWeather, woeid, 'humidity');
+		dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
+		dynamicColor(material[4], currentWeather, woeid, 'Wind Speed');
 	}
 		//When Reloaded change the rotation of the mesh to a rantom rotation
 		mesh1.rotation.z = Math.random()*Math.PI;
@@ -308,10 +320,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 						mesh1.rotation.y += 0.01;
 					// }
 		
-					dynamicColor(material[1], currentWeather, woeid, 'temp');
-					dynamicColor(material[2], currentWeather, woeid, 'humidity');
-					dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
-					dynamicColor(material[4], currentWeather, woeid, 'Wind Speed');
+					
 
 					getAmbient();
 					// window.addEventListener('devicelight', function(event){
@@ -327,74 +336,18 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				};
 
 	function getAmbient(){
-		$(".getAmbient").on('click', function(){
-			window.addEventListener("temperature", function (value) {
-   				if (value < 5) {
-					color = new THREE.Color("#4A8BCC");
-					material.color.set(color);
-				}else if (value < 10) {
-					color = new THREE.Color("#33404C");
-					material.color.set(color);
-				}else if (value < 15) {
-					color = new THREE.Color("#8C8C85");
-					material.color.set(color);
-				}else if (value < 20) {
-					color = new THREE.Color("#8C6F6F");
-					material.color.set(color);
-				}else if (value < 25) {
-					color = new THREE.Color("#52302E");
-					material.color.set(color);
-				}else if (value < 30) {
-					color = new THREE.Color("#A22607");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#D46D00");
-					material.color.set(color);
-				}
-			}, false);
-			window.addEventListener("devicelight", function (value) {
-   				var lunin = value.value;
-   				if (lumin/4 < 100) {
-   					for (var i = 0; i < material.length; i++) {
-   						material[i].wireframe.set(false);
-   					};
-   				}else{
+		
+			// window.addEventListener("devicelight", function (value) {
+   // 				var lunin = value.value;
+   // 				if (lumin/4 < 100) {
+   // 					for (var i = 0; i < material.length; i++) {
+   // 						material[i].wireframe.set(false);
+   // 					};
+   // 				}else{
 
-   				}
-			}, false);
-			window.addEventListener("humidity", function (value) {
-  				if (value < 65) {
-					color = new THREE.Color("#8FA9B0");
-					material.color.set(color);
-				}else if (value < 70) {
-					color = new THREE.Color("#6D7A7D");
-					material.color.set(color);
-				}else if (value < 75) {
-					color = new THREE.Color("#B9B8B0");
-					material.color.set(color);
-				}else if (value < 80) {
-					color = new THREE.Color("#B99391");
-					material.color.set(color);
-				}else if (value < 85) {
-					color = new THREE.Color("#AB6D82");
-					material.color.set(color);
-				}else if (value < 90) {
-					color = new THREE.Color("#B04468");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#B02349");
-					material.color.set(color);
-				}
-			}, false);
-			window.addEventListener("devicemagneticfield", function (value) {
-				glitchPass.uniforms['seed'].value = value;
-				united.addPass (glitchPass);
-			}, false);
-			window.addEventListener("atmpressure", function (value) {
-       
-   			}, false);
-		});
-	}				
+   // 				}
+			// }, false);	
+	}			
 };
 
 
@@ -411,29 +364,32 @@ function dynamicColor(material, location, woeid, type){
 		success: function(weather){
 			// console.log(weather.wind.chill)
 			if(type == 'temp'){
-				// console.log(weather.temp);
-				if (weather.temp < 5) {
-					color = new THREE.Color("#4A8BCC");
+				
+				console.log(weather.temp)
+				color = new THREE.Color();
+				color.setRGB(255, weather.temp, 0);
+				// if (weather.temp < 5) {
+				// 	color = new THREE.Color("#4A8BCC");
+				// 	material.color.set(color);
+				// }else if (weather.temp < 10) {
+				// 	color = new THREE.Color("#33404C");
+				// 	material.color.set(color);
+				// }else if (weather.temp < 15) {
+				// 	color = new THREE.Color("#8C8C85");
+				// 	material.color.set(color);
+				// }else if (weather.temp < 20) {
+				// 	color = new THREE.Color("#8C6F6F");
+				// 	material.color.set(color);
+				// }else if (weather.temp < 25) {
+				// 	color = new THREE.Color("#52302E");
+				// 	material.color.set(color);
+				// }else if (weather.temp < 30) {
+				// 	color = new THREE.Color("#A22607");
+				// 	material.color.set(color);
+				// }else{
+				// 	color = new THREE.Color("#D46D00");
 					material.color.set(color);
-				}else if (weather.temp < 10) {
-					color = new THREE.Color("#33404C");
-					material.color.set(color);
-				}else if (weather.temp < 15) {
-					color = new THREE.Color("#8C8C85");
-					material.color.set(color);
-				}else if (weather.temp < 20) {
-					color = new THREE.Color("#8C6F6F");
-					material.color.set(color);
-				}else if (weather.temp < 25) {
-					color = new THREE.Color("#52302E");
-					material.color.set(color);
-				}else if (weather.temp < 30) {
-					color = new THREE.Color("#A22607");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#D46D00");
-					material.color.set(color);
-				}
+				// }
 			}else if(type == 'humidity'){
 				// console.log(weather.humidity);
 				if (weather.humidity < 65) {
