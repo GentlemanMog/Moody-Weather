@@ -23,14 +23,10 @@ var woeid = '';
 		// currentWeather = ' ';
 	}
 
-	$(".getLocation").on('click', function(){
-		navigator.geolocation.getCurrentPosition(function(position){
-			currentWeather = position.coords.latitude + ',' + position.coords.longitude;
-		});
-	});
-
 	
 
+	
+	setInterval(dynamicColor, 18750);
 
 
 // });
@@ -90,7 +86,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 	var geometry;
 	var material = [
 					new THREE.MeshBasicMaterial({
-						color: 0x1F1F1F, 
+						color: 0x696969, 
 						wireframe: false
 					}),
 					new THREE.MeshBasicMaterial( { 
@@ -205,7 +201,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
         			//scales the model to the appropriate size
            				child.scale.set(20,20,20);
 
-           				console.log(child.material);
+           				console.log(child);
 
            			//Adds the mesh to the scene
             			mesh1.add( child );
@@ -313,25 +309,21 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				function render() {
 					
 
-					// if(window.addEventListener("deviceorientation", handleOrientation, true)){
+					//Gyroscope control 
 						// controls.update();
-					// }else{
+
+					//Gyroscope Simulation
 						mesh1.rotation.z += 0.01;
 						mesh1.rotation.y += 0.01;
-					// }
-		
-					
-
+	
+				//Enables all Sensor methods		
 					getAmbient();
-					// window.addEventListener('devicelight', function(event){
-					// 	var prox = event.value;
-					// 	mesh1.scale.set(prox/2, prox/2, prox/2);
-					// 	$(".values").html("<p>" + prox + " Lux</p>");
-					// }, false);
 
-					camera.position.x += ( mouseX - camera.position.x ) * 0.02;
-					camera.position.y += ( - mouseY - camera.position.y ) * 0.02;
-				
+
+					// camera.position.x += ( mouseX - camera.position.x ) * 0.02;
+					// camera.position.y += ( - mouseY - camera.position.y ) * 0.02;
+
+				//Update Renderer
                 	united.render(scene, camera);
 				};
 
@@ -346,9 +338,20 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
    // 				}else{
 
    // 				}
-			// }, false);	
+			// }, false);
+		$(".getLocation").on('click', function(){
+			navigator.geolocation.getCurrentPosition(function(position){
+				currentWeather = position.coords.latitude + ',' + position.coords.longitude;
+			});
+			// dynamicColor(material[1], currentWeather, woeid, 'temp');
+			// dynamicColor(material[2], currentWeather, woeid, 'humidity');
+			// dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
+			// dynamicColor(material[4], currentWeather, woeid, 'Wind Speed');
+		});
+
 	}			
 };
+
 
 
 function dynamicColor(material, location, woeid, type){
@@ -362,82 +365,53 @@ function dynamicColor(material, location, woeid, type){
 		woeid: woeid,
 		unit: 'c',
 		success: function(weather){
+			var colorRed, colorBlue, colorGreen;
 			// console.log(weather.wind.chill)
 			if(type == 'temp'){
 				
-				console.log(weather.temp)
-				color = new THREE.Color();
-				color.setRGB(255, weather.temp, 0);
-				// if (weather.temp < 5) {
-				// 	color = new THREE.Color("#4A8BCC");
-				// 	material.color.set(color);
-				// }else if (weather.temp < 10) {
-				// 	color = new THREE.Color("#33404C");
-				// 	material.color.set(color);
-				// }else if (weather.temp < 15) {
-				// 	color = new THREE.Color("#8C8C85");
-				// 	material.color.set(color);
-				// }else if (weather.temp < 20) {
-				// 	color = new THREE.Color("#8C6F6F");
-				// 	material.color.set(color);
-				// }else if (weather.temp < 25) {
-				// 	color = new THREE.Color("#52302E");
-				// 	material.color.set(color);
-				// }else if (weather.temp < 30) {
-				// 	color = new THREE.Color("#A22607");
-				// 	material.color.set(color);
-				// }else{
-				// 	color = new THREE.Color("#D46D00");
-					material.color.set(color);
-				// }
+				if(weather.temp > 15){
+					colorRed = 220;
+					colorBlue = 0;
+					colorGreen =  mapRange(weather.temp, 16, 50, 130, 40);
+				}else if( weather.temp <= 15){
+					colorRed = 0;
+					colorBlue = 220;
+					colorGreen =  mapRange(weather.temp, -10, 15, 40, 140);
+				}
+				
+				colorGreen = floatToInt(colorGreen);
+
+				console.log(weather.temp);
+				// console.log(colorGreen);
+				color = new THREE.Color('rgb('+ colorRed +',' + colorGreen + ',' + colorBlue +')');
+				
+				material.color.set(color);
+
 			}else if(type == 'humidity'){
 				// console.log(weather.humidity);
-				if (weather.humidity < 65) {
-					color = new THREE.Color("#8FA9B0");
-					material.color.set(color);
-				}else if (weather.humidity < 70) {
-					color = new THREE.Color("#6D7A7D");
-					material.color.set(color);
-				}else if (weather.humidity < 75) {
-					color = new THREE.Color("#B9B8B0");
-					material.color.set(color);
-				}else if (weather.humidity < 80) {
-					color = new THREE.Color("#B99391");
-					material.color.set(color);
-				}else if (weather.humidity < 85) {
-					color = new THREE.Color("#AB6D82");
-					material.color.set(color);
-				}else if (weather.humidity < 90) {
-					color = new THREE.Color("#B04468");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#B02349");
-					material.color.set(color);
-				}
+
+				colorRed = 30;
+				colorGreen = 150;
+				colorBlue = floatToInt(weather.humidity);
+
+				// console.log(colorBlue);
+				color = new THREE.Color('rgb(' + colorRed + ',' + colorGreen + ',' + colorBlue +')');
+				
+				material.color.set(color);
+				
 			}else if (type == 'Wind chill'){
-				// console.log(weather.wind.chill);
-				if (weather.wind.chill < 35) {
-					color = new THREE.Color("#63A1B4");
-					material.color.set(color);
-				}else if (weather.wind.chill < 40) {
-					color = new THREE.Color("#425F67");
-					material.color.set(color);
-				}else if (weather.wind.chill < 45) {
-					color = new THREE.Color("#A3B3C0");
-					material.color.set(color);
-				}else if (weather.wind.chill < 50) {
-					color = new THREE.Color("#C0BABC");
-					material.color.set(color);
-				}else if (weather.wind.chill < 55) {
-					color = new THREE.Color("#818072");
-					material.color.set(color);
-				}else if (weather.wind.chill < 60) {
-					color = new THREE.Color("#67664F");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#67663A");
-					material.color.set(color);
-				}
+				console.log(weather.wind.chill);
+
+				colorBlue = 200;
+				colorGreen = 200;
+				colorRed = mapRange(weather.wind.chill, 100, -20, 150, 0);
+				colorRed = floatToInt(colorRed);
+
+				console.log(colorRed);
+				color = new THREE.Color('rgb(' + colorRed + ',' + colorGreen + ',' + colorBlue +')');
+				
+				material.color.set(color);
+
 			}else if (type == 'Wind Speed'){
 				// console.log(weather.wind.speed);
 				if (weather.wind.speed < 9.5) {
@@ -479,4 +453,10 @@ function dynamicColor(material, location, woeid, type){
 	// .start()
 	
 	// console.log(material.color.getHex());
+}
+function mapRange(value, minT, maxT, minG, maxG){
+	return minG + (maxG - minG) * (value - minT) / (maxT - minT);
+}
+function floatToInt(value){
+	return value | 0;
 }
