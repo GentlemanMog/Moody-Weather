@@ -1,291 +1,124 @@
 <!DOCTYPE HTML>
 
 <html>
+	<head>
 
-<head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
+		<link rel="shortcut icon" type="image/x-icon" href="resources/Moody.png">
+		<title>Application</title>
+
+		<link rel="stylesheet" type="text/css" href="data/css/uielements.css">
+		
+		<link rel="stylesheet" type="text/css" href="data/css/main.css">
+		<link rel="stylesheet" type="text/css" href="data/css/App.css">
+
+	</head>
 	
-	<link rel="shortcut icon" type="image/x-icon" href="resources/Moody.png">
-	<title>Moody Weather</title>
+	<body>
+		
+		<!-- <div class="header-top"> -->
+		<div id="triDtest" class="triDtest"></div>
 
-	<!--Plugin-->
-	<link rel="stylesheet" type="text/css" href="data/css/main.css">
-	
-	<!--Bootstrap-->
-	<!-- <link href="css/jquery/jquery-ui.min.css" rel="stylesheet"> -->
-	<!-- <link href="data/css/bootstrap/bootstrap.min.css" rel="stylesheet"> -->
-<!--  
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
--->
-<!--Jquery Plugin-->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-	<script type="text/javascript" src="data/js/jquery/jquery.js"></script>
-	<script type="text/javascript" src="data/js/jquery/jquery.easing.js"></script>
- 	<script type="text/javascript" src="data/js/jquery/jquery.ulslide.js"></script>
-</head>
+		
 
-<body>
-	<div class="headsup">
-		<img src="resources/MoodyBanner.png">
-	</div>
-	
-	<div class="wrap">
-		<div class="header">
-			<div class="header-top">
-				<div class="nav-Menu">
-					<a class="smallnav" href="#"><img src="resources/navbar.png" alt=""/></a>
-					<ul class="nav">
-						<li><a class="Pro" href="#">Project</a></li>
-						<li><a class="Con" href="#">Concepts</a></li>
-						<li><a class="Dev" href="#">Development</a></li>
-						<li><a class="Exp" href="#">Experiments</a></li>
-						<li><a href="Apptemplate.html">App Template</a></li>
-						<div class="clear"></div>
-					</ul>
-				</div>
-				
-				<div class="iconSection">
-					<div class="icon">
-						<a class="showTabs" href="#"><img src="resources/Moody.png" alt=""/></a>
-					</div>
-					<div class="clear"></div>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-	</div>
+	<ul id="base" data-role="main">
+      <li class="first dragend-page">
+		
+		<!-- button two accordion/select menu -->
+		<div id="" class="slider slider2"></div>
+		<div id="" class="slider"></div>
+		<div id = "title"></div>
+		
+		
 
+		<div class="header-top">MOODY WEATHER APPLICATION</div>
 
-	<div class="main">
 		<div class="wrap">
-			<div class="column-left">
-				<div class="Lbox-2 info whatitis">
-					<h3>What it is</h3>
-					<img src="resources/MoodyLarge.png"/>
-					<div class="information">
-						<div class="words">
-							
-							<p>
-								This is an Application / website that converts weather related data into a type of "Mood". Each
-								specific data, e.g. humidity etc will be assigned
-								a specific colour and depending on how dense the data is, the deeper or lighter the colour is.
-							</p>
-							<p>
-								This App / website is also able to use the sensors on your mobile device to create a realtime
-								weather tracker. This data will be displayed in realtime and converted into the "Mood" format.
-							</p>
-							<p>
-								The "Mood" format, rather than displaying the users "Mood" towards the weather, reflects the weathers "Mood" towards the user, giving a more interesting impression on what the data is, because at the end of the day, its just numbers.
-							</p>
-							<p>
-								This is not a prediction App, this displays realtime information!
-							</p>
-
-						</div>
-					</div>
+			<div class="header">
+				<div class="textField">
+					<form>
+					<input type="text" id="loctField" placeholder="Search a location" maxlength='45'>
+					<!-- <div id="button">Get current location</div> -->
+					</form>
 				</div>
-				<div class="Lbox-1 info howitworks">
-					<h3>What Devices?</h3>
-
-					<div class="information">
-						<div class="words">
-
-							<p>
-								This app could be present on almost anything, to desktop computers, to smartphones to even watches!
-								The vision is limitless.
-							</p>
-							<p>
-								However to utilize this app / website to its fullest, mobile devices are the go to! Turning your desktop computer into a weather sensor isn't entirely possible, but that doesn't mean it cant use the other functionality!
-							</p>
-
-						</div>
-						<img src="resources/Devices.png"/>
-					</div>
-				</div>
-				<div class="Lbox-2 concep howitworks">
-					<h3>Interfaces</h3>
-					<div class="words">
-						<p>
-							The one and only Concept
-						</p>
-					</div>
-					<img src="resources/origonal.png"/>
-					<div class="words">
-
-						<p>
-							Unfortunatly there was only one way to display this data into a "Mood", Colour! and the best way to display this colour, is to be simplistic.
-						</p>
-						<p>
-							This app would use the full-screen functionality of any device (except desktop, but they can have widgets!)
-							Since this would become cluttered with different data dots, depending on user preferences, the app needed to also have a simplistic menu and navigation structure. What isn't specfically showen in this concept is the ability to convert those icons in the middle to thier raw data values. 
-						</p>
-
-					</div>
-					<!-- <img src="resources/Moody.png"/> -->
-				</div>
-				<div class="Lbox-2 devel howitworks">
-					<h3>Customizable interface</h3>
-					<img src="resources/Customizable.png"/>
-					<div class="words">
-
-							<p>
-								A function that has been on my mind is the ability to customize the dot shapes, and maybe even get rid of the display icons altogether. The way users would interact with this, users will be able to press and hold their chosen dot, and select from a variaty of relevant shapes with a simple swipe of a finger.
-							</p>
-							<p>
-								However, doing this, the dots will have to be structured in a specific form, to avoid selecting the wrong dot, and or icon. 
-							</p>
-
-						</div>
-				</div>
-				<div class="Lbox-2 expir">
-					<button class="getLocation"><img src="resources/icon.png"></button>
-					<h3>Weather Experiment Card</h3>
-					<div class="MoodRing rings">
-						<img src="resources/sunny.png"/>
-					</div>
-					<div class="humidMood rings2">
-						<img src="resources/Humid.png">
-					</div>
-						
-					<div id="weatherTime"></div>
-				</div>
-				<div id="sensor" class="Lbox-2 expir">
-					<h3>Mobile Sensor Card</h3>
-					<!-- <img src="resources/Moody.png"/> -->
-					<div class="lightlevel"></div>
-					
-					<div class="words">
-
-						<p>
-							This card represents data that is used from mobile sensors and cannot be used on a desktop.
-						</p>
-
-					</div>
-				</div>
-			</div>
-			<div class="column-middle">
-				<div class="clear">
-					<!-- <h3>How it works</h3> -->
-				</div>
-			</div>
-			<div class="column-right">
-				<div class="Lbox-2 info howitworks">
-					<h3>How it works</h3>
-					<img src="resources/appDiagram.png"/>
-
-					<div class="information ">
-						<div class="words">
-
-							<p>
-								Moody weather reacts to realtime data from the weather services database on the cloud and converts it to colour, aka "Mood". From here it converts this data (numbers) into the a specific format of colours, e.g. if its sunny the dot will be yellow. Different colour densities mean different things, depending on how high or low the data is.
-							</p>
-							<p>
-								For instance the higher the wind velocity, the greyer the wind dot is. Of course this doesnt mean its restricted to grey, going back to the sunny dot, if its rather cloudy out there perhaps the dot will turn slighly blue (meaning its getting colder!).
-							</p>
-							<p>
-								You are able to retrive your location data and compare it with other location data, just in case you dont know what to wear when you go to town!
-								Dispite this functionality, not only can you retrieve weather information from the cloud, you can also upload this data using your mobile device sensors to convert your device into a weather station (sorry desktop users!). This provides even more data, to not only you but the services that use it!
-							</p>
-
-						</div>
-					</div>
-				</div>
-				<div class="Lbox-1 info">
-					<h3>Audience</h3>
-					<!-- <img src="resources/Moody.png"/> -->
-					<div class="information">
-						<div class="words">
-
-							<p>
-								Who needs a set audience when anyone can use it!
-								Anyone who is willing to either share weather related data can so, and anyone willing to just look at the weathers "Mood" with interest.
-							</p>
-							<p>
-								Potentially this app could also be useful for comercial use! With the ability to look quickly and understand the data they can make descisions based on the weathers "Mood". Rather than fluffing through all the numbers etc.
-							</p>
-
-						</div>
-					</div>
-				</div>
-				<div class="Lbox-2 concep howitworks">
-					<h3>Mobile Networks</h3>
-					<img src="resources/MobileFunctionality.png"/>
-					<!-- <div class="information"> -->
-						<div class="words">
-
-							<p>
-								As mentioned, the way this will be used on mobile is retrieving and sending information. The data is retrieved from the cloud and sent to the phone, but is also is able to use the sensors on your mobile to send realtime data back to the cloud and update it. Also users will be able to set the app as a background or set it via other means.
-							</p>
-						
-						</div>
-					<!-- </div> -->
-					<img src="resources/MobileInterface1.png"/>
-					<img src="resources/MobileInterface2.png"/>
-					<div class="words">
-
-						<p>
-							The user interaction, with the inclusion of the previous interface discription, are as follows:
-						</p>
-						<p>
-							-The user is able to retrieve thier location data
-						</p>
-						<p>
-							-Swipe to another section that has been set another location by the user
-						</p>
-						<p>
-							-Edit the amount of data displayed
-						</p>
-						<p>
-							-Edit data dot shape
-						</p>
-						<p>
-							-Search up realtime data of a specific location using the title displayed at the top of the screen.
-						</p>
-						
-					</div>
-					<img src="resources/MobileInterface3.png"/>
-				</div>
-				<div class="Lbox-2 devel howitworks">
-					<h3>Desktop Networks</h3>
-					<img src="resources/Desktop.png"/>
-					<div class="information">
-						<div class="words">
-							<p>
-								This card displays the interaction between mobile, desktop and the cloud. However desktop is not able to use the mobile sensors to send data to the cloud, only retrieve it. Desktop is however able to still retrieve thier specific geo-location.
-							</p>
-							<p>
-								Also here is a widget design, incase users want to see it at all times, rather than use the website.
-							</p>
-						</div>
-					</div>
-					<img src="resources/Widget.png"/>
-				</div>
-				<div id="video" class="Lbox-2 expir">
-					<h3>Mobile Experiment Card</h3>
-					<!-- <img src="resources/Moody.png"/> -->
-					<!-- <div class="lightlevel"></div> -->
-					<div   class="video">
-						<iframe src="https://www.youtube.com/embed/fRRKuI0Gxa8" frameborder="0" allowfullscreen></iframe>
-					</div>
-				</div>
+				<!-- </div> -->
 			</div>
 		</div>
-	</div>
 
+		<!-- <div class="buttonSection"> -->
+			
+			<div class="locBox button2">
+				<button id ="btn-2" class="ui-btn">
+					<img src="resources/Star_Button.png" id="fav">
+					<span class="tooltip">Load Favorites</span>
+				</button>
+			</div>
+
+			<div class="lockBox legend"></div>
+
+			<div class="locBox button1">
+				<button id="btn-1" class="">
+					<img src="resources/Geolocation_Button.png" id="Geo">
+				</button>
+				<span class="tooltip">Load Current Location</span>
+			</div>
+
+
+		<!-- </div> -->
+
+      </li> 
+      
+      <li class="last dragend-page">
+					
+		
+        
+      </li>
+    </ul>
+
+    
+
+
+					<!-- ***Jquery*** -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="http://sole.github.io/tween.js/build/tween.min.js"></script>
+
+  	<script type="text/javascript" src="data/js/dragend.min.js"></script>
+
+    				<!-- ****ThreeJs**** -->
+    <script src="data/js/threejs/three.min.js"></script>
+    <script src="data/js/threejs/threex.windowresize.js"></script>
+    <script src="data/js/threejs/webgl.utils.js"></script>
+    <script src="data/js/threejs/DeviceOrientationControls.js"></script>
+    <script src="data/js/threejs/ColladaLoader.js"></script>
+
+
+
+    				<!-- ****Shaders**** -->
+    <script src="data/js/threejs/shaders/CopyShader.js"></script>
+    <script src="data/js/threejs/shaders/MirrorShader.js"></script>
+    <script src="data/js/threejs/shaders/RGBShiftShader.js"></script>
+    <script src="data/js/threejs/shaders/FilmShader.js"></script>
+    <script src="data/js/threejs/shaders/DigitalGlitch.js"></script>
+    <script src="data/js/threejs/shaders/BadTVShader.js"></script>
+    <script src="data/js/threejs/shaders/AdditiveBlendShader.js"></script>
+    <script src="data/js/threejs/shaders/ConvolutionShader.js"></script>
+
+    				<!-- ****PostProcessing**** -->
+    <script src="data/js/threejs/postprocessing/BloomPass.js"></script>
+    <script src="data/js/threejs/postprocessing/RenderPass.js"></script>
+    <script src="data/js/threejs/postprocessing/ShaderPass.js"></script>
+    <script src="data/js/threejs/postprocessing/MaskPass.js"></script> 
+    <script src="data/js/threejs/postprocessing/EffectComposer.js"></script>
+    <script src="data/js/threejs/postprocessing/GlitchPass.js"></script>
+
+    <script src="http://scenejs.org/api/latest/scenejs.js"></script>
+
+	<script type="text/javascript" src="data/js/jquery/jquery.simpleWeather.js"></script>			
+	<script type="text/javascript" src="data/js/threedUINew.js"></script>
 	
 
-	<!--Script Plugins-->
-	<script type="text/javascript" src="data/js/multiDevice.js"></script>
-	<script type="text/javascript" src="data/js/weatherApp.js"></script>
-	<script type="text/javascript" src="data/js/useDeviceSensor.js"></script>
-
-	<!--Jquer-->
-	<script type="text/javascript" src="data/js/jquery/jquery-ui.js"></script>
-	<script type="text/javascript" src="data/js/jquery/jquery.simpleWeather.js"></script>
+  <script type="text/javascript" src="data/js/script.js"></script>
 	
-	
-</body>
-
+	</body>
 </html>

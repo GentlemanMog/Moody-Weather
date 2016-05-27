@@ -81,6 +81,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 	var rendertime = 0;
 	var renderToggle = false;
+	var isGeoOn = false;
 	
 	var glitchPass, bloomPass;
 	var geometry;
@@ -275,7 +276,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		dynamicColor(material[1], currentWeather, woeid, 'temp');
 		dynamicColor(material[2], currentWeather, woeid, 'humidity');
 		dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
-		dynamicColor(material[4], currentWeather, woeid, 'Wind Speed');
+		// dynamicColor(material[4], currentWeather, woeid, 'Wind Speed'); 
 	}
 		//When Reloaded change the rotation of the mesh to a rantom rotation
 		mesh1.rotation.z = Math.random()*Math.PI;
@@ -319,7 +320,14 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				//Enables all Sensor methods		
 					getAmbient();
 
+				if (isGeoOn === true) {	
+					dynamicColor(material[1], currentWeather, woeid, 'temp');
+					dynamicColor(material[2], currentWeather, woeid, 'humidity');
+					dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
+					// dynamicColor(material[4], currentWeather, woeid, 'Wind Speed');
+				}else{
 
+				}
 					// camera.position.x += ( mouseX - camera.position.x ) * 0.02;
 					// camera.position.y += ( - mouseY - camera.position.y ) * 0.02;
 
@@ -327,27 +335,31 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
                 	united.render(scene, camera);
 				};
 
-	function getAmbient(){
-		
-			// window.addEventListener("devicelight", function (value) {
-   // 				var lunin = value.value;
-   // 				if (lumin/4 < 100) {
-   // 					for (var i = 0; i < material.length; i++) {
-   // 						material[i].wireframe.set(false);
-   // 					};
-   // 				}else{
+		function getAmbient(){
+			
 
-   // 				}
-			// }, false);
-		$(".getLocation").on('click', function(){
-			navigator.geolocation.getCurrentPosition(function(position){
-				currentWeather = position.coords.latitude + ',' + position.coords.longitude;
+				// window.addEventListener("devicelight", function (value) {
+   // 					var lunin = value.value;
+   // 					if (lumin/4 < 100) {
+   // 						for (var i = 0; i < material.length; i++) {
+   // 							material[i].wireframe.set(false);
+   // 						};
+   // 					}else{
+
+   // 					}
+				// }, false);
+
+			$("#btn-1").on('click', function(){
+				isGeoOn = true;
+				navigator.geolocation.getCurrentPosition(function(position){
+					currentWeather = position.coords.latitude + ',' + position.coords.longitude;
+				});
+
+				// alert('GeoButton is on!');
+
+				$('#Geo').attr('src', 'resources/Geolocation_Button_light.png');
+        		$('#btn-1').attr('optacity', '1');
 			});
-			// dynamicColor(material[1], currentWeather, woeid, 'temp');
-			// dynamicColor(material[2], currentWeather, woeid, 'humidity');
-			// dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
-			// dynamicColor(material[4], currentWeather, woeid, 'Wind Speed');
-		});
 
 	}			
 };
@@ -381,7 +393,7 @@ function dynamicColor(material, location, woeid, type){
 				
 				colorGreen = floatToInt(colorGreen);
 
-				console.log(weather.temp);
+				// console.log(weather.temp);
 				// console.log(colorGreen);
 				color = new THREE.Color('rgb('+ colorRed +',' + colorGreen + ',' + colorBlue +')');
 				
@@ -400,7 +412,7 @@ function dynamicColor(material, location, woeid, type){
 				material.color.set(color);
 				
 			}else if (type == 'Wind chill'){
-				console.log(weather.wind.chill);
+				// console.log(weather.wind.chill);
 
 				colorBlue = 200;
 				colorGreen = 200;
