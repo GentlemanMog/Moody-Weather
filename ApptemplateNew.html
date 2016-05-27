@@ -5,6 +5,8 @@
 
 		<link rel="shortcut icon" type="image/x-icon" href="resources/Moody.png">
 		<title>Application</title>
+
+		<link rel="stylesheet" type="text/css" href="data/css/uielements.css">
 		
 		<link rel="stylesheet" type="text/css" href="data/css/main.css">
 		<link rel="stylesheet" type="text/css" href="data/css/App.css">
@@ -13,40 +15,66 @@
 	
 	<body>
 		
-				<!-- <div class="header-top"> -->
+		<!-- <div class="header-top"> -->
 		<div id="triDtest" class="triDtest"></div>
 
-		<div class="headsup">
-			<!-- <img src="resources/MoodyBanner.png"> -->
-			<p>Beta</p>
-		</div>
+		
 
-		<!-- <div class="locBox">
-			<button class="getLocation"><img src="resources/icon.png"></button>			
-		</div> -->
+	<ul id="base" data-role="main">
+      <li class="first dragend-page">
+		
+		<!-- button two accordion/select menu -->
+		<div id="" class="slider slider2"></div>
+		<div id="" class="slider"></div>
+		<div id = "title"></div>
+		
+		
 
+		<div class="header-top">MOODY WEATHER APPLICATION</div>
 
 		<div class="wrap">
 			<div class="header">
-		<div class="textField">
-			<form>
-				<input type="text" id="loctField" placeholder="Search a location" maxlength='45'>
-				<!-- <div id="button">Get current location</div> -->
-			</form>
-		</div>
+				<div class="textField">
+					<form>
+					<input type="text" id="loctField" placeholder="Search a location" maxlength='45'>
+					<!-- <div id="button">Get current location</div> -->
+					</form>
+				</div>
 				<!-- </div> -->
 			</div>
 		</div>
-		<!-- <div class="textfield">
-			<form>
-				<input type="text" id="loctField" name="location" value="Wellington" maxlength='45'>
-				<div id="button">Get current location</div>
-			</form>
-		</div> -->
+
+		<!-- <div class="buttonSection"> -->
+			
+			<div class="locBox button2">
+				<button id ="btn-2" class="ui-btn">
+					<img src="resources/Star_Button.png" id="fav">
+					<span class="tooltip">Load Favorites</span>
+				</button>
+			</div>
+
+			<div class="lockBox legend"></div>
+
+			<div class="locBox button1">
+				<button id="btn-1" class="">
+					<img src="resources/Geolocation_Button.png" id="Geo">
+				</button>
+				<span class="tooltip">Load Current Location</span>
+			</div>
+
+
+		<!-- </div> -->
+
+      </li> 
+      
+      <li class="last dragend-page">
 					
-					<!-- <div id="button" class="TheMood">
-						Under Construction
-					</div> -->
+		
+        
+      </li>
+    </ul>
+
+    
 
 
 					<!-- ***Jquery*** -->
@@ -54,6 +82,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <script src="http://sole.github.io/tween.js/build/tween.min.js"></script>
+
+  	<script type="text/javascript" src="data/js/dragend.min.js"></script>
 
     				<!-- ****ThreeJs**** -->
     <script src="data/js/threejs/three.min.js"></script>
@@ -87,6 +117,8 @@
 	<script type="text/javascript" src="data/js/jquery/jquery.simpleWeather.js"></script>			
 	<script type="text/javascript" src="data/js/threedUINew.js"></script>
 	
+
+  <script type="text/javascript" src="data/js/script.js"></script>
 	
 	</body>
 </html>

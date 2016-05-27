@@ -20,10 +20,29 @@ canvas{
 	height: 100%;
 	/*border: 1px solid crimson;*/
 }
+.header-top{
+	font-size: 30px;
+	color: grey;
+	/*margin-top: 80vh;*/
+	/*color: white;*/
+	margin-bottom: 10px;
+	/*background: none;*/
+	opacity: 0.8;
+
+	/*border: 1px solid crimson;*/
+}
+/*.header-top div{
+	margin-left: 25vh;
+	padding: 5px 0;
+	height: 6vh;
+	width: 148vh;
+	border: 1px solid crimson;
+}*/
 .wrap{
 	position: relative;
 	margin: 0 auto;
-	height: 100vh;
+	margin-top: -14px;
+	/*height: 100vh;*/
 	/*margin-left: 0;*/
 	border: 1px;
 	border-style: solid;
@@ -37,7 +56,7 @@ canvas{
 	opacity: 0.3;
 	color: red;
 }
-.headsup p{
+.header p{
 	position: absolute;
 	margin-left: 80%;
 	margin-top: -20px;
@@ -67,7 +86,7 @@ canvas{
 	background: grey;
 	background-color: transparent;
 	width: 100%;
-	margin-top: 90vh;
+	margin-top: 2vh;
 	/*border: 1px solid crimson;*/
 	transition: all .2s linear;
 	-webkit-transition:all .2s linear; 
@@ -91,27 +110,73 @@ canvas{
 }
 .locBox{
 	position: absolute;
-	/*border-radius: 200px;*/
-	width: 13vh;
-	height: 13vh;
-	padding: 5px 0;
-	margin: 20px;
+	border-radius: 200px;
+	width: 100px;
+	height: 100%;
+	/*padding: 5px 0;*/
+	/*margin: 20px;*/
+	margin-left: 30px;
 	/*background-color: #1F1F1F;*/
 }
+.button2{
+	margin-top: -65px;
+}
+.button1{
+	margin-top: 72vh;
+}
 .locBox button{
-	opacity: 0.4;
+	opacity: 0.6;
 	border-radius: 200px;
+	background-color: transparent;
+	border-color: transparent;
 }
 .locBox img{
 	width: 100%;
+	height: 100%;
 	/*background: #1F1F1F;*/
-	opacity: 0.8;
+	/*opacity: 0.8;*/
 }
+
+.locBox .tooltip{
+	font-family: none;
+	font-size: 15px;
+	visibility: hidden;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	top: -5px;
+	left: 110%;
+
+	opacity: 0;
+    transition: opacity 1s;
+}
+.locBox .tooltip::after{
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 100%;
+	margin-top: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent black transparent transparent;
+}
+.locBox:hover .tooltip{
+	visibility: visible;
+	opacity: 1;
+}
+
 .ambient{
 	float: right;
 	/*margin-left: 86%;*/
 	position: relative;
 }
+
+
 
 @media only screen and (max-width: 1280px) {
 
@@ -126,7 +191,7 @@ canvas{
 }
 @media all and (max-width:640px) {
 	.textField{
-		margin-top: 80vh;
+		/*margin-top: 80vh;*/
 		/*margin-left: 0px;*/
 	}
 	.textField form input{
