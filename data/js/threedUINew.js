@@ -15,7 +15,6 @@ else{
 var currentWeather;
 var woeid = '';
 // $(document).ready(function(){
-	setInterval(dynamicColor, 75000);
 
 	if($("#loctField").val().length > 0){
 		currentWeather = $("#loctField").val();
@@ -23,10 +22,59 @@ var woeid = '';
 		// currentWeather = ' ';
 	}
 
-	
+
+
+
+	// $("#favs").change(function() {
+
+ //  		var $dropdown = $(this);
+
+ //  		$.getJSON("data/js/set.json", function(data) {
+  
+ //   		var key = $dropdown.val();
+ //   		var vals = [];
+              
+	//     switch(key) {
+	//       case 'places':
+	//         vals = data.places.split(",");
+	//         break;
+	//       case 'overseas':
+	//         vals = data.overseas.split(",");
+	//         break;
+	//       case 'base':
+	//         vals = ['Chosen Region'];
+	//     }
+	    
+	//     var $set = $("#sets");
+	//     $set.empty();
+	    
+	//     $.each(vals, function(index, value) {
+	//       $set.append("<option>" + value + "</option>");
+	//     }); 
+
+	//     });
+	// });
+
+document.getElementById("loctField").addEventListener("keydown", function(event){
+	if(event.keyCode === 13){
+		return false;
+	}
+}, false);
+
+function save(){
+	var textfieldSave = document.getElementById('loctField').value;
+	localStorage.setItem("text", textfieldSave);
+	currentWeather = textfieldSave;
+}
+function retrieve(){
+	var textFieldNew = localStorage.getItem("text");
+	//alert(textFieldNew);
+	 document.getElementById('loctField').value = textFieldNew;
+	 currentWeather = textFieldNew;
+}
 
 	
-	setInterval(dynamicColor, 18750);
+	setInterval(dynamicColor, 750);
 
 
 // });
@@ -70,6 +118,8 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 	var daeFile;
 	var mesh1, light;
+
+	var animation;
 
 	var mouseX = 0, mouseY = 0;
 	var cameraZ = 1000;
@@ -183,7 +233,8 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				// console.log(collada.scene);
 				collada.scene.traverse( function(child) {
 
-        			// console.log(child);
+        			console.log(child);
+        			// console.log(child.material);
         		if (child.material) {
         			if ( child.material.name === 'Temp' || child.material.name === 'Temp2') {
         				child.material = material[1];
@@ -201,8 +252,6 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
         			//scales the model to the appropriate size
            				child.scale.set(20,20,20);
-
-           				console.log(child);
 
            			//Adds the mesh to the scene
             			mesh1.add( child );
@@ -239,11 +288,11 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 	//BloomPass
 		// bloomPass = new THREE.BloomPass(3,12,2.0,1512);
 		// united.addPass (bloomPass);
+		
 	//GlitchPass effect
 		// glitchPass = new THREE.GlitchPass();
 		// glitchPass.renderToScreen = true;
 		
-
 	//FilmShader
 		// effect = new THREE.ShaderPass(THREE.FilmShader);
 		// united.addPass( effect );
@@ -273,9 +322,9 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		// document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
 		
-		dynamicColor(material[1], currentWeather, woeid, 'temp');
-		dynamicColor(material[2], currentWeather, woeid, 'humidity');
-		dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
+		// dynamicColor(material[1], currentWeather, woeid, 'temp');
+		// dynamicColor(material[2], currentWeather, woeid, 'humidity');
+		// dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
 		// dynamicColor(material[4], currentWeather, woeid, 'Wind Speed'); 
 	}
 		//When Reloaded change the rotation of the mesh to a rantom rotation
@@ -283,12 +332,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 		//update render time
 			function update() {
-				rendertime += 0.01;
-
-				 window.addEventListener('devicelight', function(event){
-						var prox = event.value;
-						effect.uniforms[ 'amount' ].value = prox/40;
-				}, false);
+				rendertime += 0.001;
 				
 			};
 
@@ -308,7 +352,8 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				};
 
 				function render() {
-					
+
+					var time = -0.0002 * Date.now();
 
 					//Gyroscope control 
 						// controls.update();
@@ -320,14 +365,16 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				//Enables all Sensor methods		
 					getAmbient();
 
-				if (isGeoOn === true) {	
+			//	if (isGeoOn === true) {	
 					dynamicColor(material[1], currentWeather, woeid, 'temp');
 					dynamicColor(material[2], currentWeather, woeid, 'humidity');
 					dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
 					// dynamicColor(material[4], currentWeather, woeid, 'Wind Speed');
-				}else{
-
-				}
+			//	}else {
+			//		dynamicColor(material[1], currentWeather, woeid, 'temp');
+			//		dynamicColor(material[2], currentWeather, woeid, 'humidity');
+			//		dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
+			//	}
 					// camera.position.x += ( mouseX - camera.position.x ) * 0.02;
 					// camera.position.y += ( - mouseY - camera.position.y ) * 0.02;
 
@@ -335,7 +382,10 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
                 	united.render(scene, camera);
 				};
 
-		function getAmbient(){
+		
+};
+
+function getAmbient(){
 			
 
 				// window.addEventListener("devicelight", function (value) {
@@ -350,7 +400,7 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				// }, false);
 
 			$("#btn-1").on('click', function(){
-				isGeoOn = true;
+				//isGeoOn = true;
 				navigator.geolocation.getCurrentPosition(function(position){
 					currentWeather = position.coords.latitude + ',' + position.coords.longitude;
 				});
@@ -358,13 +408,17 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				// alert('GeoButton is on!');
 
 				$('#Geo').attr('src', 'resources/Geolocation_Button_light.png');
-        		$('#btn-1').attr('optacity', '1');
+        		$('.button1').attr('optacity', '1');
+			});
+			$("#btn-2").on('click', function(){
+				retrieve();
+			});
+
+			$("#search").on('click', function(){
+				save();
 			});
 
 	}			
-};
-
-
 
 function dynamicColor(material, location, woeid, type){
 
@@ -419,7 +473,7 @@ function dynamicColor(material, location, woeid, type){
 				colorRed = mapRange(weather.wind.chill, 100, -20, 150, 0);
 				colorRed = floatToInt(colorRed);
 
-				console.log(colorRed);
+				//console.log(colorRed);
 				color = new THREE.Color('rgb(' + colorRed + ',' + colorGreen + ',' + colorBlue +')');
 				
 				material.color.set(color);

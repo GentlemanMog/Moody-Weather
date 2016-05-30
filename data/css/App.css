@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Chewy);
 @font-face{
 	font-family: dataerror;
 	src: url(font/UNDATAME.ttf);
@@ -21,8 +22,9 @@ canvas{
 	/*border: 1px solid crimson;*/
 }
 .header-top{
-	font-size: 30px;
-	color: grey;
+	font-size: 40px;
+	font-family: 'Chewy', cursive;
+	color: white;
 	/*margin-top: 80vh;*/
 	/*color: white;*/
 	margin-bottom: 10px;
@@ -101,7 +103,7 @@ canvas{
 	text-align: center;
 	background-color: grey;
 	border: 1px solid block;
-	font-family: dataerror;
+	font-family: 'Chewy', cursive;
 	font-size: 40px;
 	display: block;
 	margin-left: 10px;
@@ -122,7 +124,7 @@ canvas{
 	margin-top: -65px;
 }
 .button1{
-	margin-top: 72vh;
+	margin-top: 75vh;
 }
 .locBox button{
 	opacity: 0.6;
@@ -176,10 +178,21 @@ canvas{
 	position: relative;
 }
 
-
+a:hover, a:link, a:visited, a:active {
+	color:white;
+}
 
 @media only screen and (max-width: 1280px) {
-
+	.textField{
+		width: 90%;
+		float: right;
+	}
+	.button2{
+		margin-top: 5px;
+	}
+	.button1{
+		margin-top: 80vh;
+	}
 }
 @media all and (max-width: 1024px) {
    

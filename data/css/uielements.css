@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Chewy);
 html{
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Chewy', cursive;
 	font-size: 16pt;
 	
 	height: 100%;
@@ -33,7 +33,7 @@ html{
 	color: #feffff;
 	font-size: 24pt;
 	text-align: center;
-	/*font-family: 'Chewy', cursive;*/
+	font-family: 'Chewy', cursive;
 	position: fixed;
 	/*height: 22%;*/
 	bottom: 30%;
@@ -62,7 +62,6 @@ html{
 	
 }*/
 #btn-2 {
-	top: 0;
 	float: right;
 }
 #btn-1 {
@@ -99,22 +98,29 @@ html{
 
 .slider {
 	height: 100%;
-	width: 60px;
+	width: 1%;
 	/*min-width: 3.75%;*/
 	/*max-width: 7.5%;/*/
+
 	margin: 0px;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#006edc+0,0032dc+100 */
-	background: #003912; /* Old browsers */
-	background: -moz-linear-gradient(-45deg,  #006edc 0%, #0032dc 100%); /* FF3.6-15 */
-	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#006edc), color-stop(100%,#0032dc)); /* Chrome4-9,Safari4-5 */
-	background: -webkit-linear-gradient(-45deg,  #006edc 0%,#0032dc 100%); /* Chrome10-25,Safari5.1-6 */
-	background: -o-linear-gradient(-45deg,  #006edc 0%,#0032dc 100%); /* Opera 11.10-11.50 */
-	background: -ms-linear-gradient(-45deg,  #006edc 0%,#0032dc 100%); /* IE10 preview */
-	background: linear-gradient(135deg,  #006edc 0%,#0032dc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006edc', endColorstr='#0032dc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#771f48+0,753e57+48,753e57+55,771f48+100 */
+	background: #771f48; /* Old browsers */
+	background: -moz-linear-gradient(left,  #771f48 0%, #753e57 48%, #753e57 55%, #771f48 100%); /* FF3.6-15 */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#771f48), color-stop(48%,#753e57), color-stop(55%,#753e57), color-stop(100%,#771f48)); /* Chrome4-9,Safari4-5 */
+	background: -webkit-linear-gradient(left,  #771f48 0%,#753e57 48%,#753e57 55%,#771f48 100%); /* Chrome10-25,Safari5.1-6 */
+	background: -o-linear-gradient(left,  #771f48 0%,#753e57 48%,#753e57 55%,#771f48 100%); /* Opera 11.10-11.50 */
+	background: -ms-linear-gradient(left,  #771f48 0%,#753e57 48%,#753e57 55%,#771f48 100%); /* IE10 preview */
+	background: linear-gradient(to right,  #771f48 0%,#753e57 48%,#753e57 55%,#771f48 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#771f48', endColorstr='#771f48',GradientType=1 ); /* IE6-9 */
 	position: fixed;
-	left: 49.3%;
-	border-left: solid 10px #0082DC;
-	border-right: solid 10px #0082DC; 
+	left: 49.5%;
+	/*border-left: solid 10px #0082DC;
+	border-right: solid 10px #0082DC; */
 }
 
+@media only screen and (max-width: 1280px) {
+	.slider{
+		left: 49%;
+	}
+}
