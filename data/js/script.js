@@ -32,10 +32,35 @@ $(document).ready(function(){
         $('#btn-2').attr('optacity', '1');
       });
 
-      $('#btn-1').click(function(){
-        $('#Geo').attr('src', 'resources/Geolocation_Button_light.png');
-        $('#btn-1').attr('optacity', '1');
+      
+      $("#favs").change(function() {
+
+  var $dropdown = $(this);
+
+  $.getJSON("data/js/set.json", function(data) {
+  
+    var key = $dropdown.val();
+    var vals = [];
+              
+    switch(key) {
+      case 'places':
+        vals = data.places.split(",");
+        break;
+      case 'overseas':
+        vals = data.overseas.split(",");
+        break;
+      case 'base':
+        vals = ['Chosen Region'];
+    }
+    
+    var $set = $("#sets");
+    $set.empty();
+    $.each(vals, function(index, value) {
+      $set.append("<option>" + value + "</option>");
+    }); 
+
       });
+    });
 
 }); 
 
