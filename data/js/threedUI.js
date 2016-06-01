@@ -15,7 +15,6 @@ else{
 var currentWeather;
 var woeid = '';
 // $(document).ready(function(){
-	setInterval(dynamicColor, 75000);
 
 	if($("#loctField").val().length > 0){
 		currentWeather = $("#loctField").val();
@@ -23,14 +22,29 @@ var woeid = '';
 		// currentWeather = ' ';
 	}
 
-	$(".getLocation").on('click', function(){
-		navigator.geolocation.getCurrentPosition(function(position){
-			currentWeather = position.coords.latitude + ',' + position.coords.longitude;
-		});
-	});
+
+
+
+document.getElementById("loctField").addEventListener("keydown", function(event){
+	if(event.keyCode === 13){
+		return false;
+	}
+}, false);
+
+function save(){
+	var textfieldSave = document.getElementById('loctField').value;
+	localStorage.setItem("text", textfieldSave);
+	currentWeather = textfieldSave;
+}
+function retrieve(){
+	var textFieldNew = localStorage.getItem("text");
+	//alert(textFieldNew);
+	 document.getElementById('loctField').value = textFieldNew;
+	 currentWeather = textFieldNew;
+}
 
 	
-
+	setInterval(dynamicColor, 750);
 
 
 // });
@@ -72,8 +86,10 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 	var scene, renderer, united;
 	var camera, controls;
 
-	
+	var daeFile;
 	var mesh1, light;
+
+	var animation;
 
 	var mouseX = 0, mouseY = 0;
 	var cameraZ = 1000;
@@ -85,46 +101,47 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 	var rendertime = 0;
 	var renderToggle = false;
+	var isGeoOn = false;
 	
 	var glitchPass, bloomPass;
 	var geometry;
 	var material = [
 					new THREE.MeshBasicMaterial({
-						color: 0x1F1F1F, 
+						color: 0x696969, 
 						wireframe: false
 					}),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
-						wireframe: true ,
+						wireframe: false ,
 						blending: THREE.AdditiveBlending,
 						depthWrite:false,
 						depthTest:false,
-						transparent:false,
-						opacity:1,
-						wireframeLinewidth: 50
-						// side: THREE.DoubleSide
+						transparent:true,
+						opacity:0.7,
+						wireframeLinewidth: 50,
+						side: THREE.DoubleSide
 					} ),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
-						wireframe: true ,
+						wireframe: false ,
 						blending: THREE.AdditiveBlending,
 						depthWrite:false,
 						depthTest:false,
-						transparent:false,
-						opacity:1,
+						transparent:true,
+						opacity:0.7,
 						wireframeLinewidth: 10,
-						// side: THREE.DoubleSide
+						side: THREE.DoubleSide
 					} ),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
-						wireframe: true ,
+						wireframe: false ,
 						blending: THREE.AdditiveBlending,
 						depthWrite:false,
 						depthTest:false,
-						transparent:false,
-						opacity:1,
+						transparent:true,
+						opacity:0.3,
 						wireframeLinewidth: 10,
-						// side: THREE.DoubleSide
+						side: THREE.DoubleSide
 					} ),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
@@ -179,36 +196,43 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		mesh = new THREE.Mesh(geometry, material[0]);
 		scene.add(mesh);
 
-	//Temperature
-		geometry = new THREE.OctahedronGeometry(radius*.7, 1)
-		// geometry.rotation.y = Math.random()*Math.PI;
-		var mesh = new THREE.Mesh(geometry, material[1]);
-		mesh1.add(mesh);
-		scene.add(mesh1);
+	//Load Model
+		var loader = new THREE.ColladaLoader();
+			
+			loader.load('resources/weather-node.dae', function (collada){
+				// console.log(collada.scene);
+				collada.scene.traverse( function(child) {
 
-	//Humidity
-		geometry = new THREE.OctahedronGeometry( 200*.7,0);
-		geometry.translate(230, 0, 0);
-		
-		var mesh = new THREE.Mesh(geometry, material[2]);
-		mesh1.add(mesh);
-		scene.add(mesh1);
+        			console.log(child);
+        			// console.log(child.material);
+        		if (child.material) {
+        			if ( child.material.name === 'Temp' || child.material.name === 'Temp2') {
+        				child.material = material[1];
+        			}else if (child.material.name === 'Humid' || child.material.name === 'Humid2') {
+        				child.material = material[2];
+        			}else if (child.material.name === 'Windy' || child.material.name === 'Windy2'){
+        				child.material = material[3];
+        			}
 
-	//Wind chill
-		geometry = new THREE.TorusKnotGeometry( 150*.7,20, 30, 3);
-		geometry.translate(-230, 0, 450);
-		
-		var mesh = new THREE.Mesh(geometry, material[3]);
-		mesh1.add(mesh);
-		scene.add(mesh1);
+        		}
+        		
+        		if( child instanceof THREE.Mesh ) {
+        			//sets a new material to the model
+           				// child.material = material[1];
 
-	//Wind Speed
-		geometry = new THREE.TorusKnotGeometry( 150*.7,20, 30, 3);
-		geometry.translate(-100, 180, 450);
-		
-		var mesh = new THREE.Mesh(geometry, material[4]);
-		mesh1.add(mesh);
-		scene.add(mesh1);
+        			//scales the model to the appropriate size
+           				child.scale.set(20,20,20);
+
+           			//Adds the mesh to the scene
+            			mesh1.add( child );
+        				scene.add(mesh1);
+        			}
+        			
+    			});
+
+
+
+			});
 
 
 	//Gyroscope Controls THREEJS
@@ -234,18 +258,18 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 	//BloomPass
 		// bloomPass = new THREE.BloomPass(3,12,2.0,1512);
 		// united.addPass (bloomPass);
+		
 	//GlitchPass effect
-		glitchPass = new THREE.GlitchPass();
+		// glitchPass = new THREE.GlitchPass();
 		// glitchPass.renderToScreen = true;
 		
-
 	//FilmShader
 		// effect = new THREE.ShaderPass(THREE.FilmShader);
 		// united.addPass( effect );
 
 	//Copy Shader
-		// effect = new THREE.ShaderPass(THREE.CopyShader);
-		// united.addPass( effect );
+		effect = new THREE.ShaderPass(THREE.CopyShader);
+		united.addPass( effect );
 
 	//Mirror Shader
 		// effect = new THREE.ShaderPass(THREE.MirrorShader)
@@ -258,9 +282,9 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// united.addPass (effect);
 
 	//Colour displacment Shader
-		effect = new THREE.ShaderPass( THREE.RGBShiftShader );
-		effect.uniforms[ 'amount' ].value = 0.001;	
-		united.addPass( effect );
+		// effect = new THREE.ShaderPass( THREE.RGBShiftShader );
+		// effect.uniforms[ 'amount' ].value = 0.001;	
+		// united.addPass( effect );
 
 		effect.renderToScreen = true;
 
@@ -268,18 +292,17 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 		// document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		// document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
 		
+		// dynamicColor(material[1], currentWeather, woeid, 'temp');
+		// dynamicColor(material[2], currentWeather, woeid, 'humidity');
+		// dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
+		// dynamicColor(material[4], currentWeather, woeid, 'Wind Speed'); 
 	}
 		//When Reloaded change the rotation of the mesh to a rantom rotation
 		mesh1.rotation.z = Math.random()*Math.PI;
 
 		//update render time
 			function update() {
-				rendertime += 0.01;
-
-				 window.addEventListener('devicelight', function(event){
-						var prox = event.value;
-						effect.uniforms[ 'amount' ].value = prox/40;
-				}, false);
+				rendertime += 0.001;
 				
 			};
 
@@ -293,110 +316,76 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 				
 			//update renderer camera and Passes
 				this.animate = function() {
-					controls.update();
+					// controls.update();
 					render();
 
 				};
 
 				function render() {
-					
 
-					// if(window.addEventListener("deviceorientation", handleOrientation, true)){
-						// controls.update();
-					// }else{
-						mesh1.rotation.z += 0.01;
-						mesh1.rotation.y += 0.01;
-					// }
-		
+					var time = -0.0002 * Date.now();
+
+					//Gyroscope control 
+						controls.update();
+
+					//Gyroscope Simulation
+						// mesh1.rotation.z += 0.01;
+						// mesh1.rotation.y += 0.01;
+	
+				//Enables all Sensor methods		
+					getAmbient();
+
+			//	if (isGeoOn === true) {	
 					dynamicColor(material[1], currentWeather, woeid, 'temp');
 					dynamicColor(material[2], currentWeather, woeid, 'humidity');
 					dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
-					dynamicColor(material[4], currentWeather, woeid, 'Wind Speed');
+					// dynamicColor(material[4], currentWeather, woeid, 'Wind Speed');
+			//	}else {
+			//		dynamicColor(material[1], currentWeather, woeid, 'temp');
+			//		dynamicColor(material[2], currentWeather, woeid, 'humidity');
+			//		dynamicColor(material[3], currentWeather, woeid, 'Wind chill');
+			//	}
+					// camera.position.x += ( mouseX - camera.position.x ) * 0.02;
+					// camera.position.y += ( - mouseY - camera.position.y ) * 0.02;
 
-					getAmbient();
-					// window.addEventListener('devicelight', function(event){
-					// 	var prox = event.value;
-					// 	mesh1.scale.set(prox/2, prox/2, prox/2);
-					// 	$(".values").html("<p>" + prox + " Lux</p>");
-					// }, false);
-
-					camera.position.x += ( mouseX - camera.position.x ) * 0.02;
-					camera.position.y += ( - mouseY - camera.position.y ) * 0.02;
-				
+				//Update Renderer
                 	united.render(scene, camera);
 				};
 
-	function getAmbient(){
-		$(".getAmbient").on('click', function(){
-			window.addEventListener("temperature", function (value) {
-   				if (value < 5) {
-					color = new THREE.Color("#4A8BCC");
-					material.color.set(color);
-				}else if (value < 10) {
-					color = new THREE.Color("#33404C");
-					material.color.set(color);
-				}else if (value < 15) {
-					color = new THREE.Color("#8C8C85");
-					material.color.set(color);
-				}else if (value < 20) {
-					color = new THREE.Color("#8C6F6F");
-					material.color.set(color);
-				}else if (value < 25) {
-					color = new THREE.Color("#52302E");
-					material.color.set(color);
-				}else if (value < 30) {
-					color = new THREE.Color("#A22607");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#D46D00");
-					material.color.set(color);
-				}
-			}, false);
-			window.addEventListener("devicelight", function (value) {
-   				var lunin = value.value;
-   				if (lumin/4 < 100) {
-   					for (var i = 0; i < material.length; i++) {
-   						material[i].wireframe.set(false);
-   					};
-   				}else{
-
-   				}
-			}, false);
-			window.addEventListener("humidity", function (value) {
-  				if (value < 65) {
-					color = new THREE.Color("#8FA9B0");
-					material.color.set(color);
-				}else if (value < 70) {
-					color = new THREE.Color("#6D7A7D");
-					material.color.set(color);
-				}else if (value < 75) {
-					color = new THREE.Color("#B9B8B0");
-					material.color.set(color);
-				}else if (value < 80) {
-					color = new THREE.Color("#B99391");
-					material.color.set(color);
-				}else if (value < 85) {
-					color = new THREE.Color("#AB6D82");
-					material.color.set(color);
-				}else if (value < 90) {
-					color = new THREE.Color("#B04468");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#B02349");
-					material.color.set(color);
-				}
-			}, false);
-			window.addEventListener("devicemagneticfield", function (value) {
-				glitchPass.uniforms['seed'].value = value;
-				united.addPass (glitchPass);
-			}, false);
-			window.addEventListener("atmpressure", function (value) {
-       
-   			}, false);
-		});
-	}				
+		
 };
 
+function getAmbient(){
+			var backColor;
+
+			window.addEventListener("devicelight", function (value) {
+   				var lunin = value.value;
+   				var newcolor = mapRange(lumin, 0, 400, 84, 204);
+   				newcolor = floatToInt(newcolor);
+   				backColor = new THREE.Color('rgb('+ newcolor +',' + newcolor + ',' + newcolor +')');
+   				material[0].color.set(backColor);
+			}, false);
+
+			$("#btn-1").on('click', function(){
+				//isGeoOn = true;
+				navigator.geolocation.getCurrentPosition(function(position){
+					currentWeather = position.coords.latitude + ',' + position.coords.longitude;
+				});
+
+				// alert('GeoButton is on!');
+
+				$('#Geo').attr('src', 'resources/Geolocation_Button_light.png');
+        		$('.button1').attr('optacity', '1');
+			});
+			$("#btn-2").on('click', function(){
+				retrieve();
+			});
+
+			$("#search").on('click', function(){
+				save();
+			});
+
+	}			
 
 function dynamicColor(material, location, woeid, type){
 
@@ -409,79 +398,57 @@ function dynamicColor(material, location, woeid, type){
 		woeid: woeid,
 		unit: 'c',
 		success: function(weather){
+			var colorRed, colorBlue, colorGreen;
 			// console.log(weather.wind.chill)
 			if(type == 'temp'){
-				// console.log(weather.temp);
-				if (weather.temp < 5) {
-					color = new THREE.Color("#4A8BCC");
-					material.color.set(color);
-				}else if (weather.temp < 10) {
-					color = new THREE.Color("#33404C");
-					material.color.set(color);
-				}else if (weather.temp < 15) {
-					color = new THREE.Color("#8C8C85");
-					material.color.set(color);
-				}else if (weather.temp < 20) {
-					color = new THREE.Color("#8C6F6F");
-					material.color.set(color);
-				}else if (weather.temp < 25) {
-					color = new THREE.Color("#52302E");
-					material.color.set(color);
-				}else if (weather.temp < 30) {
-					color = new THREE.Color("#A22607");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#D46D00");
-					material.color.set(color);
+				
+				if(weather.temp > 15){
+					colorRed = 220;
+					colorBlue = 0;
+					colorGreen =  mapRange(weather.temp, 16, 50, 130, 40);
+				}else if( weather.temp <= 15){
+					colorRed = 0;
+					colorBlue = 220;
+					colorGreen =  mapRange(weather.temp, -10, 15, 40, 140);
 				}
+				
+				colorGreen = floatToInt(colorGreen);
+
+				// console.log(weather.temp);
+				// console.log(colorGreen);
+				color = new THREE.Color('rgb('+ colorRed +',' + colorGreen + ',' + colorBlue +')');
+				
+				material.color.set(color);
+
+				$(".tempLegend").html( weather.temp + "&deg" + weather.units.temp);
+
 			}else if(type == 'humidity'){
 				// console.log(weather.humidity);
-				if (weather.humidity < 65) {
-					color = new THREE.Color("#8FA9B0");
-					material.color.set(color);
-				}else if (weather.humidity < 70) {
-					color = new THREE.Color("#6D7A7D");
-					material.color.set(color);
-				}else if (weather.humidity < 75) {
-					color = new THREE.Color("#B9B8B0");
-					material.color.set(color);
-				}else if (weather.humidity < 80) {
-					color = new THREE.Color("#B99391");
-					material.color.set(color);
-				}else if (weather.humidity < 85) {
-					color = new THREE.Color("#AB6D82");
-					material.color.set(color);
-				}else if (weather.humidity < 90) {
-					color = new THREE.Color("#B04468");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#B02349");
-					material.color.set(color);
-				}
+
+				colorRed = 30;
+				colorGreen = 150;
+				colorBlue = floatToInt(weather.humidity);
+
+				// console.log(colorBlue);
+				color = new THREE.Color('rgb(' + colorRed + ',' + colorGreen + ',' + colorBlue +')');
+				
+				material.color.set(color);
+				$(".humidLegend").html( weather.humidity + "%");
+
 			}else if (type == 'Wind chill'){
 				// console.log(weather.wind.chill);
-				if (weather.wind.chill < 35) {
-					color = new THREE.Color("#63A1B4");
-					material.color.set(color);
-				}else if (weather.wind.chill < 40) {
-					color = new THREE.Color("#425F67");
-					material.color.set(color);
-				}else if (weather.wind.chill < 45) {
-					color = new THREE.Color("#A3B3C0");
-					material.color.set(color);
-				}else if (weather.wind.chill < 50) {
-					color = new THREE.Color("#C0BABC");
-					material.color.set(color);
-				}else if (weather.wind.chill < 55) {
-					color = new THREE.Color("#818072");
-					material.color.set(color);
-				}else if (weather.wind.chill < 60) {
-					color = new THREE.Color("#67664F");
-					material.color.set(color);
-				}else{
-					color = new THREE.Color("#67663A");
-					material.color.set(color);
-				}
+
+				colorBlue = 200;
+				colorGreen = 200;
+				colorRed = mapRange(weather.wind.chill, 100, -20, 150, 0);
+				colorRed = floatToInt(colorRed);
+
+				//console.log(colorRed);
+				color = new THREE.Color('rgb(' + colorRed + ',' + colorGreen + ',' + colorBlue +')');
+				
+				material.color.set(color);
+				$(".WindLegend").html( weather.wind.chill + "&degF");
+
 			}else if (type == 'Wind Speed'){
 				// console.log(weather.wind.speed);
 				if (weather.wind.speed < 9.5) {
@@ -523,4 +490,10 @@ function dynamicColor(material, location, woeid, type){
 	// .start()
 	
 	// console.log(material.color.getHex());
+}
+function mapRange(value, minT, maxT, minG, maxG){
+	return minG + (maxG - minG) * (value - minT) / (maxT - minT);
+}
+function floatToInt(value){
+	return value | 0;
 }

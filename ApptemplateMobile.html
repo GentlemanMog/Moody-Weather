@@ -4,7 +4,7 @@
 	<head>
 
 		<link rel="shortcut icon" type="image/x-icon" href="resources/Moody.png">
-		<title>Application</title>
+		<title>Moody Weather</title>
 
 		<link rel="stylesheet" type="text/css" href="data/css/uielements.css">
 		
@@ -30,17 +30,24 @@
 		
 		
 
-		<div class="header-top">MOODY WEATHER APPLICATION</div>
+		<div class="header-top" ><a href="https:/goo.gl/33nUJ6"> MOODY WEATHER APPLICATION </a></div>
 
-		<div class="wrap">
+		 <div class="wrap">
 			<div class="header">
 				<div class="textField">
 					<form>
-					<input type="text" id="loctField" placeholder="Search a location" maxlength='45'>
+						<input type="text" id="loctField" placeholder="Search a location" maxlength='45'>
 					<!-- <div id="button">Get current location</div> -->
+						<button type="button" class="ui-btn" id="search" data-inline="false">
+							Search
+							<!-- <img src="resources/searchArrow.png"> -->
+						</button>
 					</form>
 				</div>
 				<!-- </div> -->
+				
+					
+	            
 			</div>
 		</div>
 
@@ -53,7 +60,23 @@
 				</button>
 			</div>
 
-			<div class="lockBox legend"></div>
+			<div class="lockBox legend">
+				<div class="tempLegend legendtext"></div>
+				<div class="legendWrapper">
+					<img src="resources/leg-1.svg">
+					<span class="tooltip">Temperature</span>
+				</div>
+				<div class="humidLegend legendtext"></div>
+				<div class="legendWrapper humidtool">
+					<img src="resources/leg-2.svg">
+					<span class="tooltip">Humidity</span>
+				</div>
+				<div class="WindLegend legendtext"></div>
+				<div class="legendWrapper windchilltool">
+					<img src="resources/leg-3.svg">
+					<span class="tooltip">Wind Chill</span>
+				</div>
+			</div>
 
 			<div class="locBox button1">
 				<button id="btn-1" class="">
@@ -74,7 +97,7 @@
       </li>
     </ul>
 
-    
+   
 
 
 					<!-- ***Jquery*** -->
@@ -115,7 +138,7 @@
     <script src="http://scenejs.org/api/latest/scenejs.js"></script>
 
 	<script type="text/javascript" src="data/js/jquery/jquery.simpleWeather.js"></script>			
-	<script type="text/javascript" src="data/js/threedUINew.js"></script>
+	<script type="text/javascript" src="data/js/threedUI.js"></script>
 	
 
   <script type="text/javascript" src="data/js/script.js"></script>
