@@ -108,7 +108,9 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 	var material = [
 					new THREE.MeshBasicMaterial({
 						color: 0x696969, 
-						wireframe: false
+						wireframe: false,
+						transparent: true,
+						blending: THREE.AdditiveBlending,
 					}),
 					new THREE.MeshBasicMaterial( { 
 						color: 0xFF3399, 
@@ -323,7 +325,15 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 				function render() {
 
-					var time = -0.0002 * Date.now();
+					// var time = -0.0002 * Date.now();
+
+					window.addEventListener("devicelight", function (value) {
+   						var lunin = value.value;
+   						var newcolor = mapRange(lumin, 0, 400, 84, 120);
+   						newcolor = floatToInt(newcolor);
+   						backColor = new THREE.Color('rgb('+ newcolor +',' + newcolor + ',' + newcolor +')');
+   						material[0].color.set(backColor);
+					}, false);
 
 					//Gyroscope control 
 						controls.update();
@@ -357,14 +367,6 @@ function triDtest(containerID, fullWidth, fullHeight, viewX, viewY, viewWidth, v
 
 function getAmbient(){
 			var backColor;
-
-			window.addEventListener("devicelight", function (value) {
-   				var lunin = value.value;
-   				var newcolor = mapRange(lumin, 0, 400, 84, 204);
-   				newcolor = floatToInt(newcolor);
-   				backColor = new THREE.Color('rgb('+ newcolor +',' + newcolor + ',' + newcolor +')');
-   				material[0].color.set(backColor);
-			}, false);
 
 			$("#btn-1").on('click', function(){
 				//isGeoOn = true;
