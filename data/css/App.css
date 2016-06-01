@@ -318,11 +318,7 @@ a:hover, a:link, a:visited, a:active {
 		/*height: 50px;*/
 		margin-left: 2px;
 	}
-	.button2{
-		margin-top: 74vh;
-	}
 	.button1{
-		margin-top: 74vh;
 		margin-left: 25vw;
 	}
 	.legend{
@@ -375,9 +371,34 @@ a:hover, a:link, a:visited, a:active {
 		margin-left: 0;
 	}
 }
+@media all and (max-height: 1080px){
+
+}
 @media all and (max-height: 800px) {
 	.textField{
 		/*border: 1px solid red;*/
+	}
+	.button2{
+		/*margin-left: 3vw;*/
+		/*margin-top: 74vh;*/
+		margin-top: 1vh;
+	}
+	.button1{
+		/*margin-left: 3vw;*/
+		/*margin-top: 74vh;*/
+		margin-top: 65vh;
+	}
+	.legend{
+		/*border: 1px solid orange;*/
+		margin-top: 25vh;
+	}
+	.legendtext{
+		font-size: 20px;
+	}
+}
+@media all and (max-height: : 640px) {
+	.textField{
+		/*border: 1px solid yellow;*/
 	}
 	.button2{
 		/*margin-left: 3vw;*/
@@ -388,14 +409,17 @@ a:hover, a:link, a:visited, a:active {
 		margin-top: 52vh;
 	}
 }
-@media all and (max-height: : 640) {
-	.textField{
-		border: 1px solid yellow;
-	}
-}
-@media all and (max-height: : 480) {
+@media all and (max-height: : 480px) {
 	.textField{
 		border: 1px solid blue;
+	}
+	.button2{
+		/*margin-left: 3vw;*/
+		margin-top: -2vh;
+	}
+	.button1{
+		/*margin-left: 3vw;*/
+		margin-top: 52vh;
 	}
 }
 
