@@ -3,6 +3,10 @@
 	font-family: dataerror;
 	src: url(font/UNDATAME.ttf);
 }
+@font-face{
+	font-family: chew;
+	src: url(font/Chewy.ttf);
+}
 body{
 	background: #262626;
 	font-family: dataerror;
@@ -23,7 +27,7 @@ canvas{
 }
 .header-top{
 	font-size: 40px;
-	font-family: 'Chewy', cursive;
+	font-family: chew;
 	color: white;
 	/*margin-top: 80vh;*/
 	/*color: white;*/
@@ -94,6 +98,25 @@ canvas{
 	-webkit-transition:all .2s linear; 
 
 }
+#search{
+	width: 150px;
+	height: 62px;
+	background: grey;
+	background: transparent;
+	border-color: transparent white white white;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	font-family: chew;
+	font-size: 30px;
+	font-style: transparent;
+	display: inline-block;
+}
+#search img{
+	margin-left: -5px;
+}
+#search:hover{
+	opacity: 0.5;
+}
 .textField form{
 	display: block;
 	padding: 5px;
@@ -102,13 +125,14 @@ canvas{
 .textField form input{
 	text-align: center;
 	background-color: grey;
-	border: 1px solid block;
-	font-family: 'Chewy', cursive;
+	/*border: 1px solid block;*/
+	font-family: chew;
 	font-size: 40px;
 	display: block;
 	margin-left: 10px;
 	width: 98%;
 	height: 88%;
+	border-color: transparent white white white;
 }
 .locBox{
 	position: absolute;
@@ -117,14 +141,19 @@ canvas{
 	height: 100%;
 	/*padding: 5px 0;*/
 	/*margin: 20px;*/
-	margin-left: 30px;
+	margin-left: 55px;
 	/*background-color: #1F1F1F;*/
+	transition: all .2s linear;
+	-webkit-transition:all .2s linear;
 }
 .button2{
-	margin-top: -65px;
+	margin-top: -13.5vh;
+	 
 }
 .button1{
-	margin-top: 75vh;
+	margin-top: 65vh;
+/*	transition: all .2s linear;
+	-webkit-transition:all .2s linear; */
 }
 .locBox button{
 	opacity: 0.6;
@@ -169,7 +198,7 @@ canvas{
 }
 .locBox:hover .tooltip{
 	visibility: visible;
-	opacity: 1;
+	opacity: 0.7;
 }
 
 .ambient{
@@ -182,44 +211,191 @@ a:hover, a:link, a:visited, a:active {
 	color:white;
 }
 
+.legend{
+	width: 250px;
+	position: relative;
+	float: right;
+	margin-right: 50px;
+	margin-top: 50vh;
+	/*height: 100px;*/
+	transition: all .2s linear;
+}
+.legendWrapper{
+	margin-top: -51px;
+	float: right;
+}
+.legendWrapper img{
+	width: 100%;
+	height: 5vh;
+	opacity: 0.5;
+}
+.legendtext{
+	height: 50px;
+	margin-left: 70px;
+	/*border: 1px solid crimson;*/
+	width: 30%;
+	font-size: 40px;
+	font-family: chew;
+	color: grey;
+}
+.legendWrapper .tooltip{
+	font-family: none;
+	font-size: 15px;
+	visibility: hidden;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	top: -5px;
+	right: 75%;
+
+	opacity: 0;
+    transition: opacity 1s;
+}
+.humidtool .tooltip{
+	top: 43px;
+}
+.windchilltool .tooltip{
+	top: 92px;
+}
+.legendWrapper .tooltip::after{
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 100%;
+	margin-top: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent transparent transparent black;
+}
+.legendWrapper:hover .tooltip{
+	visibility: visible;
+	opacity: 1;
+}
+.legendtext:hover .tooltip{
+	visibility: visible;
+	opacity: 1;
+}
+
 @media only screen and (max-width: 1280px) {
 	.textField{
 		width: 90%;
 		float: right;
+		/*border: 1px solid yellow;*/
 	}
 	.button2{
-		margin-top: 5px;
+		margin-top: 1vh;
 	}
 	.button1{
-		margin-top: 80vh;
+		margin-top: 78vh;
+	}
+	.legend{
+		/*margin-right: 30px;*/
 	}
 }
 @media all and (max-width: 1024px) {
-   
+   .textField{
+   		width: 85%;
+		/*border: 1px solid blue;*/
+	}
 }
 @media all and (max-width:800px) {
+	.wrap{
+		margin-left: 0px;
+	}
+	#search{
+		height: 45px;
+		/*width: 100px;*/
+	}
+	.textField{
+		/*border: 1px solid crimson;*/
+	}
 	.textField form input{
-		margin-left: 4px;
+		/*height: 50px;*/
+		margin-left: 2px;
+	}
+	.button2{
+		margin-top: 74vh;
+	}
+	.button1{
+		margin-top: 74vh;
+		margin-left: 25vw;
+	}
+	.legend{
+		/*margin-right: 20px;*/
 	}
 }
 @media all and (max-width:640px) {
 	.textField{
 		/*margin-top: 80vh;*/
 		/*margin-left: 0px;*/
+		/*border: 1px solid indigo;*/
+		width: 96%;
 	}
 	.textField form input{
 		margin-left: 2px;
 	}
+	.button2{
+		margin-left: 3vw;
+		margin-top: 66vh;
+	}
+	.button1{
+		margin-left: 3vw;
+		margin-top: 78vh;
+	}
 }
 @media all and (max-width:480px) {
+	.textField{
+		/*border: 1px solid orange;*/
+		margin-left: 0;
+	}
 	.textField form input{
 		margin-left: 1px;
 	}
+	.button2{
+		margin-left: 3vw;
+		margin-top: 60vh;
+	}
+	.button1{
+		margin-left: 3vw;
+		margin-top: 72vh;
+	}
+
 }
 @media all and (max-width:320px) {
 	.textField form input{
 		margin-left: 0px;
 	}
+	.textField{
+		border: 1px solid orange;
+		margin-left: 0;
+	}
 }
-
+@media all and (max-height: 800px) {
+	.textField{
+		/*border: 1px solid red;*/
+	}
+	.button2{
+		/*margin-left: 3vw;*/
+		margin-top: -19vh;
+	}
+	.button1{
+		/*margin-left: 3vw;*/
+		margin-top: 52vh;
+	}
+}
+@media all and (max-height: : 640) {
+	.textField{
+		border: 1px solid yellow;
+	}
+}
+@media all and (max-height: : 480) {
+	.textField{
+		border: 1px solid blue;
+	}
+}
 

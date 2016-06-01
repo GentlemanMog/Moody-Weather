@@ -38,7 +38,10 @@
 					<form>
 						<input type="text" id="loctField" placeholder="Search a location" maxlength='45'>
 					<!-- <div id="button">Get current location</div> -->
-						<button type="button" class="ui-btn" id="search" data-inline="false">Search</button>
+						<button type="button" class="ui-btn" id="search" data-inline="false">
+							Search
+							<!-- <img src="resources/searchArrow.png"> -->
+						</button>
 					</form>
 				</div>
 				<!-- </div> -->
@@ -57,7 +60,23 @@
 				</button>
 			</div>
 
-			<div class="lockBox legend"></div>
+			<div class="lockBox legend">
+				<div class="tempLegend legendtext"></div>
+				<div class="legendWrapper">
+					<img src="resources/leg-1.svg">
+					<span class="tooltip">Temperature</span>
+				</div>
+				<div class="humidLegend legendtext"></div>
+				<div class="legendWrapper humidtool">
+					<img src="resources/leg-2.svg">
+					<span class="tooltip">Humidity</span>
+				</div>
+				<div class="WindLegend legendtext"></div>
+				<div class="legendWrapper windchilltool">
+					<img src="resources/leg-3.svg">
+					<span class="tooltip">Wind Chill</span>
+				</div>
+			</div>
 
 			<div class="locBox button1">
 				<button id="btn-1" class="">

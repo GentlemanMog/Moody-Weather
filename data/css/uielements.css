@@ -1,6 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Chewy);
+
 html{
-	font-family: 'Chewy', cursive;
+	font-family: chew;
 	font-size: 16pt;
 	
 	height: 100%;
@@ -33,7 +33,7 @@ html{
 	color: #feffff;
 	font-size: 24pt;
 	text-align: center;
-	font-family: 'Chewy', cursive;
+	font-family: chew;
 	position: fixed;
 	/*height: 22%;*/
 	bottom: 30%;
@@ -75,7 +75,7 @@ html{
 	color: #feffff;
 	font-size: 24pt;
 	text-align: center;
-	font-family: 'Chewy', cursive;
+	font-family: chew;
 	position: fixed;
 	height: 22%;
 	bottom: 30%;
@@ -121,6 +121,6 @@ html{
 
 @media only screen and (max-width: 1280px) {
 	.slider{
-		left: 49%;
+		left: 49.5%;
 	}
 }
